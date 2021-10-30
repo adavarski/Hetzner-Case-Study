@@ -459,7 +459,7 @@ Ref:
 - https://www.hetzner.com/cloud/load-balancer
   
 
-##  4.Key technologies & Tools for building environments/infrastructure on Hetzner Cloud   
+## 4.Key technologies & Tools for building environments/infrastructure on Hetzner Cloud   
 
 We want to launch Kubernetes, ScyllaDB and some other services across dedicated (bare-metal) and Cloud VMs. Create an outline how you would design the architecture for the environment, which key technologies and configurations you would setup so that Kubernetes and other services could be deployed. Especially take into account how you would build in security into the environment
 
@@ -530,13 +530,13 @@ Note2:  MetalLB (https://metallb.universe.tf/: MetalLB is a load-balancer implem
 
 Examples:
 
-### 5.3.1. Vagrant+VirtualBox:
+#### 5.3.1. Vagrant+VirtualBox:
 
 - https://github.com/adavarski/k8s-UAP/tree/main/k8s#kubespray-ha-2-masters (based on https://github.com/kubernetes-sigs/kubespray/blob/master/Vagrantfile)
 - https://github.com/adavarski/k8s-ansible-kubeadm-addons-helm-metallb (Note: old, need to check)
 - etc. in my repos
 
-### 5.3.2. KVM example:
+#### 5.3.2. KVM example:
 
 - https://github.com/adavarski/packer-terraform-kvm-ansible-k8s-FINAL (Note: old, need to check)
 
@@ -550,11 +550,11 @@ Examples:
 - https://github.com/adavarski/RKE-rancher-kvm) (Note: old, need to check)
 
 
-### 6.ScyllaDB
+## 6.ScyllaDB
 
 We will use k8s operator for this and deploy ScyllaDB on k8s  : Ref: [Apppendix 6](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#Appendix_6-scylla-on-k8s)
 
-### 7. CI/CD: GitLab/Jenkins/etc.
+## 7. CI/CD: GitLab/Jenkins/etc.
 
 Note: GitLab can be integrated (Add existing k8s cluster) with kubernetes versions < v1.19. Gitlab can be run inside k8s or on VM/Dedicated Server.
 
