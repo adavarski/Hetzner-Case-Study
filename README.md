@@ -1494,9 +1494,8 @@ kubectl apply -f https://raw.githubusercontent.com/hetznercloud/csi-driver/v1.2.
 
 Now you should be able to deploy new applications with storage capability (volumes). But in order to access these, you would need an entry point from the internet like NodePorts, but there is already a better solution: LoadBalancer/Ingress.
 
-
 # Install NGINX Ingress Controller
-```
+
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
 
 ```
