@@ -1186,7 +1186,7 @@ Note: DNS: Adding A records. add an additional A record k8s-cluster.dev1.example
 
 ```
 
-### Apppendix4:  k3s-based Kubernetes development cluster with WireGard VPN on Hetzner Cloud (private network, wireguard setup) 
+### Apppendix_4:  k3s-based Kubernetes development cluster with WireGard VPN on Hetzner Cloud (private network, wireguard setup) 
 
 Use Teraform hcloud modles for CloudVMs provisioning:  https://github.com/hetznercloud/terraform-provider-hcloud
   
