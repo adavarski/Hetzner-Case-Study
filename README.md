@@ -456,7 +456,7 @@ We want to launch Kubernetes, ScyllaDB and some other services across dedicated 
 
 Ref: 
   
-- https://github.com/hetznercloud 
+- https://github.com/hetznercloud : Usefull repos.
 - https://github.com/hetznercloud/awesome-hcloud: List of awesome libraries, tools, and integrations for Hetzner Cloud)
 
 ### 4.1. IaC & CM: terraform & ansible & hcloud-cli
@@ -508,7 +508,7 @@ https://github.com/adavarski/proxmox-terraform-k8s
 
 Note: ProxMox (for DEV clusters): We can create VMs with Terraform and after that setup ansible inventory with IPs of VMs, and create k8s cluster with Kubespray (REF: https://github.com/kubernetes-sigs/kubespray) or using ansible playbooks with kubeadm.
 
-### 5.2.VMWARE (ESXi or VSchere) on dedicated server (k8s VMs on VMWARE:masters&workers)
+### 5.2.VMWARE (ESXi/vSphere) on dedicated server (k8s VMs on VMWARE:masters&workers)
 
 https://docs.hetzner.com/robot/dedicated-server/virtualization/vmware-esxi/
 https://community.hetzner.com/tutorials/install-and-configure-vmware-vsphere
@@ -527,7 +527,6 @@ Note2:  MetalLB (https://metallb.universe.tf/: MetalLB is a load-balancer implem
 We will use k8s operator for this and deploy ScyllaDB on k8s. Ref: [Apppendix 6](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#Appendix_6-scylla-on-k8s) for details.
 
 ## 7. CI/CD: GitLab/Jenkins/etc.
-
   
 GitLab can be integrated (Add existing k8s cluster) with kubernetes versions < v1.19. Gitlab can be run inside k8s or on CloudVM/Dedicated Server.
 
@@ -549,11 +548,9 @@ New concepts like GitOps aim to completely manage the active configuration state
 GitOps, a process popularized by Weaveworks, is another trending concept within the scope of Kubernetes CI/CD. GitOps involves the use of applications reacting to git push events. GitOps focuses primarily on Kubernetes clusters matching the state described by configuration residing in a Git repository. On a simplistic level, GitOps aims to replace kubectl apply with git push. Popular and well-supported GitOps implementations include GitLab, ArgoCD, Flux, and Jenkins X. Argo CD (GitOps): We can configure argo to run deployments for us instead of kubectl apply -f. 
 
 
-### Appendix_1: k8s development cluster install/setup using k3s (withoud WireGuard, only private network) 
+### Appendix_1: k3s-based Kubernetes development cluster on Hetzner Cloud (private network) 
 
-How to set up K3S and Hetzner's cloud native load balancer with Kubernetes support
-
-This appendix/tutorial will guide you through setting up a Kubernetes cluster using K3S. K3S is a lightweight Kubernetes distribution which is perfectly suited for the small Hetzner VMs like the CX11. Additionally, you will set up Hetzner's cloud load balancer which performs SSL offloading and forwards traffic to your Kubernetes system. Optionally, you will learn how to set up a distributed, replicated file system using GlusterFS. This allows you to move pods between the nodes while still having access to the pods' persistent data.  
+This appendix/tutorial will guide you through setting up a Kubernetes cluster using K3S. K3S is a lightweight Kubernetes distribution which is perfectly suited for the small Hetzner VMs like the CX11. Additionally, you will set up Hetzner's cloud native load balancer with Kubernetes support, which performs SSL offloading and forwards traffic to your Kubernetes system. Optionally, you will learn how to set up a distributed, replicated file system using GlusterFS. This allows you to move pods between the nodes while still having access to the pods' persistent data.  
                                                                                         
 #### Prerequisites
 
@@ -849,7 +846,7 @@ In Hetzner's cloud console, your load balancer should turn to healthy green and 
 
 
 ```  
-### Appendix_2: Create a Kubernetes cluster with Rancher on Hetzner Cloud for Development 
+### Appendix_2:  Rancher-based Kubernetes Development cluster on Hetzner Cloud  (private network)
   
 About Rancher
 
@@ -921,7 +918,7 @@ After pressing “Create”, the driver is downloaded and we can create a cluste
 In Hetzner we need to create a API Token for 3rd parties access like Rancher.
 Go to “Access”, select “API Tokens” tab and click “Generate API Token”
  
-<img src="pictures/hcloud-ebable-api-tokens.png" width="400">
+<img src="pictures/hcloud-ebable-api-tokens.png" width="200">
   
 Enter a brief description like “Rancher Token” and press “Generate API token”
   
