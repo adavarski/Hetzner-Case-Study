@@ -110,7 +110,7 @@ Example: Generate a graph of the Kilo network in Graphviz format "kgctl graph | 
 
 ### 2.2. Firewalls: Setup firewall rules via shell scripts, using hcloud-cli util.
 
-Examples(k8s-related):
+Example(k8s-related):
 ```
 ### Example1:
 hcloud firewall create --name firewall-kubernetes
@@ -499,13 +499,13 @@ k8s clusters provisioning/deploy :
 
 Note: Use https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs to provision k8s CloudVMs
 
-See Appendixes for k3s-base, kubeadm-based, ranchier-based DEVELOPMENT k3s clusters provisioning/setup && kubespray/ranchier for PRODUCTION k3s clusters provisioning/setup.
+See Appendixes for k3s-base, kubeadm-based, Ranchier-based DEVELOPMENT k3s clusters provisioning/setup && Kubespray/Ranchier for PRODUCTION k3s clusters provisioning/setu examples.
 
-- Appendix_1: k8s development cluster install/setup using k3s (withoud WireGuard, only private network) 
-- Appendix_2: Create a Kubernetes cluster with Rancher on Hetzner Cloud for Development 
-- Appendix_3: WireGuard VPN setup, k8s development cluster install/setup using kubeadm and setup k8s cluster with Wireguard VPN
-- Appendix_4: hcloud k8s cluster setup with kubeadm for DEVELOPMENT environments (Note: use only privete hcloud network, not using Wireguard):
-- Appendix_5: hcloud k8s Production Ready Kubernetes Clusters setup using kubespray (2 k8s Mastes in different regions) 
+### Appendix_1: k3s-based Kubernetes development cluster on Hetzner Cloud (private network) 
+### Appendix_2: Rancher-based Kubernetes Development cluster on Hetzner Cloud  (private network)
+### Appendix_3: Kubernetes Development cluster setup using kubeadm with WireGuard VPN on Hetzner Cloud (private networks, wireguard)
+### Appendix_4: Kubernetes Development cluster setup using kubeadm with WireGuard VPN on Hetzner Cloud (private networks)
+### Appendix_5: Kubespray-based Production Ready Kubernetes Clusters on Hetzner Cloud (2 k8s Mastes in different locations) 
 
 
 ## 5.Virtualization options for k8s/etc. on Hetzner Cloud (OPTIONAL) - Proxmox & Vmware on Dedicated Servers (for dev/qa)
@@ -537,7 +537,7 @@ Note2:  MetalLB (https://metallb.universe.tf/: MetalLB is a load-balancer implem
 
 ## 6.ScyllaDB
 
-We will use k8s operator for this and deploy ScyllaDB on k8s. Ref: [Apppendix 6](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#Appendix_6-scylla-on-k8s) for details.
+We will use k8s operator for this and deploy ScyllaDB on k8s. See Appendix_6: ScyllaDB on k8s for details.
 
 ## 7. CI/CD: GitLab/Jenkins/etc.
   
