@@ -1322,7 +1322,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 
 ```
 
-### Appendix_4: Kubernetes Development cluster setup using kubeadm with WireGuard VPN on Hetzner Cloud (private networks)
+### Appendix_5: Kubernetes Development cluster setup using kubeadm with WireGuard VPN on Hetzner Cloud (private networks)
 
 ```
 # Install the hcloud cli utility
@@ -1500,7 +1500,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 
 ```
 
-### Appendix_5: Kubespray-based Production Ready Kubernetes Clusters on Hetzner Cloud (2 k8s Mastes in different locations) 
+### Appendix_6: Kubespray-based Production Ready Kubernetes Clusters on Hetzner Cloud (2 k8s Mastes in different locations) 
 
 Ref: https://github.com/kubernetes-sigs/kubespray
   
@@ -1570,7 +1570,7 @@ postgresql-1594282655   	default  	1       	2020-07-09 11:17:38.550513366 +0300 
 telegraf-1594282866     	default  	1       	2020-07-09 11:21:09.59958005 +0300 EEST 	deployed	telegraf-1.6.1     	1.12       
 ```
   
-### Appendix_6: ScyllaDB on k8s 
+### Appendix_7: ScyllaDB on k8s 
 
 Scylla is an open-source distributed NoSQL wide-column data store. It was designed to be compatible with Apache Cassandra while achieving significantly higher throughputs and lower latencies. It supports the same protocols as Cassandra (CQL and Thrift) and the same file formats (SSTable), but is a completely rewritten implementation, using the C++20 language replacing Cassandra's Java, and the Seastar asynchronous programming library with threads, shared memory, mapped files, and other classic Linux programming techniques. In addition implementing Cassandra's protocols, Scylla also implements the Amazon DynamoDB API.
 
