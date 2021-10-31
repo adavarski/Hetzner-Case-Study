@@ -102,11 +102,11 @@ Note3: We can use Kilo, a multi-cloud network overlay built on WireGuard and des
 
 The topology and configuration of a Kilo network (Wireguard full network connections) example:
 
-<img src="pictures/1-wireguard-vpn-full-network-connections.png" width="600">
+<img src="pictures/1-wireguard-vpn-full-network-connections.png" width="500">
 
 Example: Generate a graph of the Kilo network in Graphviz format "kgctl graph | circo -Tsvg > cluster.svg"
 
-<img src="pictures/kilo-wireguard.svg" width="600">
+<img src="pictures/kilo-wireguard.svg" width="500">
 
 ### 2.2. Firewalls: Setup firewall rules via shell scripts, using hcloud-cli util.
 
