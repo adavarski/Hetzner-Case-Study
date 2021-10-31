@@ -342,6 +342,19 @@ then you should restart the network configuration:
 ```
 systemctl restart network.service
 ```
+Note (Pre: OPTIONAL): If you’re using kube-proxy in IPVS mode, since Kubernetes v1.14.2 you have to enable strict ARP mode. You can achieve this by editing kube-proxy config in current cluster:
+
+```
+# see what changes would be made, returns nonzero returncode if different
+kubectl get configmap kube-proxy -n kube-system -o yaml | \
+sed -e "s/strictARP: false/strictARP: true/" | \
+kubectl diff -f - -n kube-system
+
+# actually apply the changes, returns nonzero returncode on errors only
+kubectl get configmap kube-proxy -n kube-system -o yaml | \
+sed -e "s/strictARP: false/strictARP: true/" | \
+kubectl apply -f - -n kube-system
+```  
 
 #### Install MetalLB
 Install MetalLB by applying the Manifest
@@ -867,7 +880,7 @@ Among the different types of Rancher installation we use the Docker container fo
 First, we need to create a private network in Hetzner. We’ll put all our VMs there.
 Click first on “Networks” and then “Create network” red button.
   
-<img src="pictures/ranchier-hcloud-ui-create-private-network-wizard.png" width="600">
+<img src="pictures/ranchier-hcloud-ui-create-private-network-wizard.png" width="200">
   
 Now, we continue creating a small VM where we’ll install our Rancher’s server.
 In our case, we use an CX21 instance (2 vCPUs / 4 GB) with Ubuntu 18.04. Don’t forget to check on your private network created before!
@@ -1054,11 +1067,11 @@ If it works, you can see something similar to this screen capture.
 
 - Free SSL certificate for your Kubernetes cluster with Rancher (OPTIONAL): ref: https://jmrobles.medium.com/free-ssl-certificate-for-your-kubernetes-cluster-with-rancher-2cf6559adeba   
   
-### Appendix_3: WireGuard VPN setup, k8s development cluster install/setup using kubeadm and setup k8s cluster with Wireguard VPN
-
+### Appendix_3: Kubernetes Development cluster setup using kubeadm with WireGuard VPN on Hetzner Cloud (private networks, wireguard)
+  
 Provision three CX31 cloud servers from Hetzner, each providing 2 CPUs, 2 GB memory, 80 GB of disk storage, running Ubuntu 20.04, and deployed in the Nuremberg region. Use Terraform hcloud module for VMs provisioning.
 
-Small k8s cluster with a Master Node and two Worker Nodes example:
+Small k8s develpoment cluster with a Master Node and two Worker Nodes example:
 
 <img src="pictures/k8s-nodes.png" width="600">
 
@@ -1138,7 +1151,7 @@ database or other dependencies. Install Weave with the kubectl utility previousl
 
 $ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')&env.IPALLOC_RANGE=10.32.0.0/16"
 
-Optional—Install Weave Scope 21 for network visualization and monitoring:
+Optional—Install Weave Scope for network visualization and monitoring:
 
 $ kubectl apply -f https://cloud.weave.works/k8s/scope.yaml?k8s-version=$(kubectl version | base64 | tr -d '\n')
 
@@ -1161,6 +1174,7 @@ WantedBy=multi-user.target
 EOF
 
 Apply the new configuration on each server:
+  
 $ systemctl enable overlay-route.service
 
 ### Join Worker Nodes
@@ -1172,27 +1186,30 @@ $ kubeadm join 10.0.1.1:6443 --token REDACTED --discovery-token-ca-cert-hash RED
 
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
 
-Note: DNS: Adding A records. add an additional A record k8s-cluster.dev1.hcloud.dev for the Kubernetes API pointed to the public IP of the master node (node 1).
+Note: DNS: Adding A records. add an additional A record k8s-cluster.dev1.example.dev for the Kubernetes API pointed to the public IP of the master node (node 1).
 
 ```
 
-### Apppendix4: hcloud k3s setup with Wireguard VPN for k8s DEVELOPMENY environments 
+### Apppendix4:  k3s-based Kubernetes development cluster with WireGard VPN on Hetzner Cloud (private network, wireguard setup) 
 
-Use Teraform hcloud modles for VMs provisioning:  https://github.com/hetznercloud/terraform-provider-hcloud & https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs to provision VMs (example: https://github.com/vitobotta/terraform-hcloud)
-
+Use Teraform hcloud modles for CloudVMs provisioning:  https://github.com/hetznercloud/terraform-provider-hcloud
+  
 Note: For Development Environment example: Three CX31 cloud servers from Hetzner, each providing 2 CPUs, 2 GB memory, 80 GB of disk storage, running Ubuntu 20.04, and deployed in the Nuremberg region.
 
 ```
 # k8s Master 
 
-Install/configure Wireguard (see above Appendix1 for details):
+Install/configure WireGuard (see above Appendix_3 for WireGuard setup details):
+  
 # apt install -y apt-transport-https ca-certificates gnupg-agent software-properties-common
 # apt-add-repository universe
 # apt-get update
 # apt-get install wireguard -y 
 
+Install k3s:  
+  
 Example: curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable=traefik --tls-san=192.168.1.31 --node-external-ip=192.168.1.31 --flannel-backend=wireguard" sh -
-
+  
 Note: --disable=traefik, will will use NGINX Ingress Controller insted of Traefik (Ref: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml)
 
 root@kmaster1:~# curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="---disable=traefik --flannel-backend=wireguard" sh -
@@ -1287,73 +1304,7 @@ peer: 6XBwRuwpH/5YkydjLA1E1bjM7u/6XS9kfjNc9tmbdQE=
 
 # Setup Hetzner Cloud Controller Manager & Hetzner Cloud Storage (CSI) 
 
-# Deploy the Hetzner Cloud Controller Manager
-
-hcloud network list
-
-cat <<EOF | kubectl apply -f -
-apiVersion: v1
-kind: Secret
-metadata:
-  name: hcloud
-  namespace: kube-system
-stringData:
-  token: "<the api token you created just yet>"
-  network: "<network-id>"
-EOF
-
-kubectl apply -f  https://raw.githubusercontent.com/hetznercloud/hcloud-cloud-controller-manager/master/deploy/v1.5.1.yaml
-
-# Deploy Hetzner Cloud Storage (CSI)
-
-cat <<EOF | kubectl apply -f -
-apiVersion: v1
-kind: Secret
-metadata:
-  name: hcloud-csi
-  namespace: kube-system
-stringData:
-  token: "<the api token you created just yet>"
-EOF
-
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/csi-api/release-1.14/pkg/crd/manifests/csidriver.yaml
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/csi-api/release-1.14/pkg/crd/manifests/csinodeinfo.yaml
-
-kubectl apply -f https://raw.githubusercontent.com/hetznercloud/csi-driver/v1.2.3/deploy/kubernetes/hcloud-csi.yml
-
-Note1: Now you should be able to deploy new applications with storage capability (volumes). The CSI driver enables you to provision volumes from within Kubernetes using the created hcloud-volumes storage class. Just create a PersistentVolumeClaim and attach it to a pod.
-
-Example:
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: example-pvc
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
-  storageClassName: hcloud-volumes
----
-kind: Pod
-apiVersion: v1
-metadata:
-  name: example-pod
-spec:
-  containers:
-    - name: example
-      image: hello-world
-      volumeMounts:
-      - mountPath: "/data"
-        name: example-volume
-  volumes:
-    - name: example-volume
-      persistentVolumeClaim:
-        claimName: example-pvc
-
-Note2: We can use Persistent Volumes with Rook Ceph (OPTIONAL)
+# Setup Persistent Volumes with Rook Ceph (OPTIONAL)
 
 Kubernetes Persistent Volumes backed by Ceph orchestrated by Rook. Ceph is a distributed storage cluster, providing Kubernetes Persistent Volumes for object-, block-, and filesystem-based storage. The Rook operator is used to install and manage Ceph behind the scenes.
 
@@ -1365,137 +1316,13 @@ https://rook.io/
 https://rook.io/docs/rook/v1.0/ceph-examples.html
 https://docs.hetzner.com/cloud/servers/faq/
 
-```
-
-- Setup Kubernetes on Hetzner Cloud: Ingress
-
-```
-Note: Hetzner Floating IP - using MetalLB + HCloud IP Floater
-
-# Create a floating ip using
-
-hcloud floating-ip create --type ipv4 --home-location nbg1 --name public-ip
-
-# Configure floating IP on every node
-
-cat <<EOF > /etc/sysconfig/network-scripts/ifcfg-eth0:1
-BOOTPROTO=static
-DEVICE=eth0:1
-IPADDR=<your-floating-ip-goes-here>
-PREFIX=32
-TYPE=Ethernet
-USERCTL=no
-ONBOOT=yes
-EOF
-
-systemctl restart network.service
-
-Note (Pre:OPTIONAL): If you’re using kube-proxy in IPVS mode, since Kubernetes v1.14.2 you have to enable strict ARP mode. You can achieve this by editing kube-proxy config in current cluster:
-
-# see what changes would be made, returns nonzero returncode if different
-kubectl get configmap kube-proxy -n kube-system -o yaml | \
-sed -e "s/strictARP: false/strictARP: true/" | \
-kubectl diff -f - -n kube-system
-
-# actually apply the changes, returns nonzero returncode on errors only
-kubectl get configmap kube-proxy -n kube-system -o yaml | \
-sed -e "s/strictARP: false/strictARP: true/" | \
-kubectl apply -f - -n kube-system
-
-
-# Install MetalLB
-
-kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.3/manifests/metallb.yaml
-
-cat <<EOF |kubectl apply -f-
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  namespace: metallb-system
-  name: config
-data:
-  config: |
-    address-pools:
-    - name: default
-      protocol: layer2
-      addresses:
-      - <your-floating-ip-goes-here>/32
-EOF
-
-
-# To implement the automatic failover mechanism, install the FIP controller.
-
-kubectl create namespace fip-controller
-kubectl apply -f https://raw.githubusercontent.com/cbeneke/hcloud-fip-controller/master/deploy/rbac.yaml
-kubectl apply -f https://raw.githubusercontent.com/cbeneke/hcloud-fip-controller/master/deploy/deployment.yaml
-
-cat <<EOF | kubectl apply -f -
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: fip-controller-config
-  namespace: fip-controller
-data:
-  config.json: |
-    {
-      "hcloud_floating_ips": [ "<your-floating-ip-goes-here>" ]
-    }
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: fip-controller-secrets
-  namespace: fip-controller
-stringData:
-  HCLOUD_API_TOKEN: "<the api token you created just yet>"
-EOF
-
 # Install NGINX Ingress Controller
 
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
 
-Note: since we used MetalLB we create a Service pointing to the NGINX Ingress Controller
-
-cat <<EOF | kubectl apply -f -
-kind: Service
-apiVersion: v1
-metadata:
-  name: ingress-nginx
-  namespace: ingress-nginx
-  annotations:
-    metallb.universe.tf/allow-shared-ip: "floating-ip"
-  labels:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
-spec:
-  type: LoadBalancer
-  selector:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
-  ports:
-    - name: http
-      port: 80
-      targetPort: http
-    - name: https
-      port: 443
-      targetPort: https
-EOF
-
-Note: Now we can deploy Ingress resources and pointing our browser to http://<floating-ip-address>/<whatever>, we will see that deployed page/application. But we don’t like entering IP addresses to browsers, which is why there is DNS. Since we don’t want to do that manually I have something in mind, which I’ll write about soon!
-
-
 ```
 
-### Appendix_4: hcloud k8s cluster setup with kubeadm for DEVELOPMENT environments (Note: use only privete hcloud network, not using Wireguard):
-
-Great sources to depend this case study on:
-
-Christian Beneke: https://community.hetzner.com/tutorials/install-kubernetes-cluster
-blinkeye: https://blinkeye.github.io/post/public/2019-07-25-hetzner-k8s-with-private-network/
-Kubernetes Documentation (which is very good!): https://kubernetes.io/docs/home/
-Marcel Ryser blog posts: https://metawave.ch/posts/kubernetes-hetzner-setup/ && https://metawave.ch/posts/kubernetes-hetzner-ingress/ && https://github.com/dysnix/hetzner-floating-ip
-
-- Kubernetes on Hetzner Cloud: Setup a Kubernetes Cluster
+### Appendix_4: Kubernetes Development cluster setup using kubeadm with WireGuard VPN on Hetzner Cloud (private networks)
 
 ```
 # Install the hcloud cli utility
@@ -1669,133 +1496,19 @@ kubectl apply -f https://raw.githubusercontent.com/hetznercloud/csi-driver/v1.2.
 Now you should be able to deploy new applications with storage capability (volumes). But in order to access these, you would need an entry point from the internet like NodePorts, but there is already a better solution: LoadBalancer/Ingress.
 
 
--  Kubernetes on Hetzner Cloud: Ingress
-  
-```
-Note: Hetzner Floating IP - using MetalLB + HCloud IP Floater
-
-# Create a floating ip using
-
-hcloud floating-ip create --type ipv4 --home-location nbg1 --name public-ip
-
-# Configure floating IP on every node
-
-cat <<EOF > /etc/sysconfig/network-scripts/ifcfg-eth0:1
-BOOTPROTO=static
-DEVICE=eth0:1
-IPADDR=<your-floating-ip-goes-here>
-PREFIX=32
-TYPE=Ethernet
-USERCTL=no
-ONBOOT=yes
-EOF
-
-systemctl restart network.service
-
-Note (Pre: OPTIONAL): If you’re using kube-proxy in IPVS mode, since Kubernetes v1.14.2 you have to enable strict ARP mode. You can achieve this by editing kube-proxy config in current cluster:
-
-# see what changes would be made, returns nonzero returncode if different
-kubectl get configmap kube-proxy -n kube-system -o yaml | \
-sed -e "s/strictARP: false/strictARP: true/" | \
-kubectl diff -f - -n kube-system
-
-# actually apply the changes, returns nonzero returncode on errors only
-kubectl get configmap kube-proxy -n kube-system -o yaml | \
-sed -e "s/strictARP: false/strictARP: true/" | \
-kubectl apply -f - -n kube-system
-
-# Install MetalLB
-
-kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.3/manifests/metallb.yaml
-
-cat <<EOF |kubectl apply -f-
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  namespace: metallb-system
-  name: config
-data:
-  config: |
-    address-pools:
-    - name: default
-      protocol: layer2
-      addresses:
-      - <your-floating-ip-goes-here>/32
-EOF
-
-
-# To implement the automatic failover mechanism, install the FIP controller.
-
-kubectl create namespace fip-controller
-kubectl apply -f https://raw.githubusercontent.com/cbeneke/hcloud-fip-controller/master/deploy/rbac.yaml
-kubectl apply -f https://raw.githubusercontent.com/cbeneke/hcloud-fip-controller/master/deploy/deployment.yaml
-
-cat <<EOF | kubectl apply -f -
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: fip-controller-config
-  namespace: fip-controller
-data:
-  config.json: |
-    {
-      "hcloud_floating_ips": [ "<your-floating-ip-goes-here>" ]
-    }
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: fip-controller-secrets
-  namespace: fip-controller
-stringData:
-  HCLOUD_API_TOKEN: "<the api token you created just yet>"
-EOF
-
 # Install NGINX Ingress Controller
 
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
 
-Note: since we used MetalLB we create a Service pointing to the NGINX Ingress Controller
-
-cat <<EOF | kubectl apply -f -
-kind: Service
-apiVersion: v1
-metadata:
-  name: ingress-nginx
-  namespace: ingress-nginx
-  annotations:
-    metallb.universe.tf/allow-shared-ip: "floating-ip"
-  labels:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
-spec:
-  type: LoadBalancer
-  selector:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
-  ports:
-    - name: http
-      port: 80
-      targetPort: http
-    - name: https
-      port: 443
-      targetPort: https
-EOF
-
-
-Note: Now we can deploy Ingress resources and pointing our browser to http://<floating-ip-address>/<whatever>, we will see that deployed page/application.
-
-But we don’t like entering IP addresses to browsers, which is why there is DNS. Since we don’t want to do that manually I have something in mind, which I’ll write about soon!
-
 ```
 
-### Appendix_5: hcloud k8s Production Ready Kubernetes Clusters setup using kubespray (2 k8s Mastes in different regions) 
+### Appendix_5: Kubespray-based Production Ready Kubernetes Clusters on Hetzner Cloud (2 k8s Mastes in different locations) 
 
 Ref: https://github.com/kubernetes-sigs/kubespray
   
 Pre: Provision hcloud VMs using terraform/ansible/hcloud-cli and setup kubespray ansible inventory.
 
-Note: Three CX31 cloud servers from Hetzner running Ubuntu 20.04, and deployed in different hcloud regions, using hcloud terraform modules for Dedicated-Servers/VMs provisioning.
+Note: Three CX31 cloud servers from Hetzner running Ubuntu 20.04, and deployed in different locations, using hcloud terraform modules for CloudVMs provisioning.
 
 
 ```
