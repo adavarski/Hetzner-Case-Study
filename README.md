@@ -517,17 +517,17 @@ We can use some virtualization on Hetzner Cloud Dedicated Servers(bare-metal)
 
 Ref:
 
-https://community.hetzner.com/tutorials/install-and-configure-proxmox_ve
-https://github.com/adavarski/proxmox-terraform-k8s
+- https://community.hetzner.com/tutorials/install-and-configure-proxmox_ve
+- https://github.com/adavarski/proxmox-terraform-k8s
 
 Note: ProxMox (for DEV clusters): We can create VMs with Terraform and after that setup ansible inventory with IPs of VMs, and create k8s cluster with Kubespray (REF: https://github.com/kubernetes-sigs/kubespray) or using ansible playbooks with kubeadm.
 
 ### 5.2.VMWARE (ESXi/vSphere) on dedicated server (k8s VMs on VMWARE:masters&workers)
 
-https://docs.hetzner.com/robot/dedicated-server/virtualization/vmware-esxi/
-https://community.hetzner.com/tutorials/install-and-configure-vmware-vsphere
-https://community.hetzner.com/tutorials/install-and-configure-routervm-for-vmware-vsphere
-https://github.com/adavarski/k8s-vmware-terraform-kubespray (with MetalLB for k8s ingress)
+- https://docs.hetzner.com/robot/dedicated-server/virtualization/vmware-esxi/
+- https://community.hetzner.com/tutorials/install-and-configure-vmware-vsphere
+- https://community.hetzner.com/tutorials/install-and-configure-routervm-for-vmware-vsphere
+- https://github.com/adavarski/k8s-vmware-terraform-kubespray (with MetalLB for k8s ingress)
 
 Note: We need some licenses for vSphere if we want to use Terraform, because Terraform modules need VMWare vSphere installation and setup. Also I've not been using VMWARE for more than 10 years actively, because I prefer open source private clouds (OpenStack, Apache CloudStack, etc.)
 
