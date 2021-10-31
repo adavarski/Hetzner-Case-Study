@@ -1491,7 +1491,6 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/csi-api/release-1.
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/csi-api/release-1.14/pkg/crd/manifests/csinodeinfo.yaml
 
 kubectl apply -f https://raw.githubusercontent.com/hetznercloud/csi-driver/v1.2.3/deploy/kubernetes/hcloud-csi.yml
-```
 
 Now you should be able to deploy new applications with storage capability (volumes). But in order to access these, you would need an entry point from the internet like NodePorts, but there is already a better solution: LoadBalancer/Ingress.
 
