@@ -494,12 +494,12 @@ k8s clusters provisioning/deploy :
 
 - Kubespray/Rancher for k8s PRODUCTION clusters provisioning on Hetzner CloudVMs.
 - k3s (for k8s DEVELOPMENT/QA clusters/environments) or kubeadm-based/Rancher-based/RKE-based k8s clusters running on Hetzner CloudVMs or On-Prem/Home infrastructure
-- We will use terraform/ansible(OPTIONAL) for provisioning infrastructure 
+- We will use terraform/hcloud-cli/ansible(OPTIONAL) for provisioning infrastructure 
 - We will us k8s Operators/Helm Charts/YAML manifests for creating k8s deployments/workloads (for PaaS/SaaS services).
 
 Note: Use https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs to provision k8s CloudVMs
 
-See Appendixes for k3s-base, kubeadm-based, Ranchier-based DEVELOPMENT k3s clusters provisioning/setup && Kubespray/Ranchier for PRODUCTION k3s clusters provisioning/setu examples.
+See Appendixes for k3s-base, kubeadm-based, Ranchier-based DEVELOPMENT k3s clusters provisioning/setup && Kubespray/Ranchier for PRODUCTION k3s clusters provisioning/setu EXAMPLES:
 
 - [Appendix_1: k3s-based Kubernetes development cluster on Hetzner Cloud (private network)](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#appendix_1-k3s-based-kubernetes-development-cluster-on-hetzner-cloud-private-network-1)
 - [Appendix_2: Rancher-based Kubernetes Development cluster on Hetzner Cloud  (private network)](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#appendix_2--rancher-based-kubernetes-development-cluster-on-hetzner-cloud--private-network)
@@ -509,51 +509,41 @@ See Appendixes for k3s-base, kubeadm-based, Ranchier-based DEVELOPMENT k3s clust
 - [Appendix_6: Kubespray-based Production Ready Kubernetes Clusters on Hetzner Cloud (2 k8s Mastes in different locations)](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#appendix_6-kubespray-based-production-ready-kubernetes-clusters-on-hetzner-cloud-2-k8s-mastes-in-different-locations) 
 
 
-## 5.Virtualization options for k8s/etc. on Hetzner Cloud (OPTIONAL) - Proxmox & Vmware on Dedicated Servers (for dev/qa)
+## 5.Virtualization options for k8s/etc. on Hetzner Cloud (OPTIONAL) - Proxmox & Vmware on Dedicated Servers (for Dev/QA k8s clusters/etc.)
 
-We can use some virtualization on Hetzner Cloud Dedicated Servers(bare-metal)
+We can use some virtualization on Hetzner Cloud Dedicated Servers (bare-metal).
 
-### 5.1.Proxmox on hcloud (k8s VMs on ProxMox:masters&workers): 
+### 5.1.Proxmox on Hetzner Cloud (for Dev k8s clusters/etc.)
 
 Ref:
 
 - https://community.hetzner.com/tutorials/install-and-configure-proxmox_ve
 - https://github.com/adavarski/proxmox-terraform-k8s
 
-Note: ProxMox (for DEV clusters): We can create VMs with Terraform and after that setup ansible inventory with IPs of VMs, and create k8s cluster with Kubespray (REF: https://github.com/kubernetes-sigs/kubespray) or using ansible playbooks with kubeadm.
 
-### 5.2.VMWARE (ESXi/vSphere) on dedicated server (k8s VMs on VMWARE:masters&workers)
+### 5.2.VMWARE (ESXi/vSphere) on Hetzner Cloud (for Dev k8s clusters/etc.)
 
 - https://docs.hetzner.com/robot/dedicated-server/virtualization/vmware-esxi/
-- https://community.hetzner.com/tutorials/install-and-configure-vmware-vsphere
-- https://community.hetzner.com/tutorials/install-and-configure-routervm-for-vmware-vsphere
-- https://github.com/adavarski/k8s-vmware-terraform-kubespray (with MetalLB for k8s ingress)
+- https://github.com/adavarski/k8s-vmware-terraform-kubespray (with MetalLB for k8s Ingress)
 
 Note: We need some licenses for vSphere if we want to use Terraform, because Terraform modules need VMWare vSphere installation and setup. Also I've not been using VMWARE for more than 10 years actively, because I prefer open source private clouds (OpenStack, Apache CloudStack, etc.)
 
-### 5.3.Vagrant+VirtualBox/KVM (for DEV clusters) running on a single dedicated hcloud server.
+### 5.3.Vagrant+VirtualBox/KVM (for DEV k8s clusters) running on a single Hetzner Cloud Dedicated Server.
 
 Note1:  KVM is hard to support
 Note2:  MetalLB (https://metallb.universe.tf/: MetalLB is a load-balancer implementation for bare metal Kubernetes clusters will be very hard to be hacked with such Vagrant+VirtualBox/KVM setups. 
 
 ## 6.ScyllaDB
 
-We will use k8s operator for this and deploy ScyllaDB on k8s. See [Appendix_6: ScyllaDB](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#appendix_7-scylladb-on-k8s) on k8s for details.
+We will use k8s operator for this and deploy ScyllaDB on k8s. 
+See [Appendix_6: ScyllaDB on k8s](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#appendix_7-scylladb-on-k8s) for details.
 
 ## 7. CI/CD: GitLab/Jenkins/etc.
   
-GitLab can be integrated (Add existing k8s cluster) with kubernetes versions < v1.19. Gitlab can be run inside k8s or on CloudVM/Dedicated Server.
+GitLab can be integrated (add existing k8s cluster) with Kubernetes and can be run inside k8s or on CloudVM/Dedicated Server.
 
-GitLab supports the following Kubernetes versions, and you can upgrade your Kubernetes version to any supported version at any time:
-
-1.19 (support ends on February 22, 2022)
-1.18 (support ends on November 22, 2021)
-1.17 (support ends on September 22, 2021)
-
-The helm tiller can't be installed in kubernetes v1.18.+ because is not supported Gitlab versions (helm tiller install issue, and helm is needed for all the other GitLab sub apps depend on Helm Tiller: you cannot use cert manager, ingress, etc.) :
-
-Ref (GitLab example) : Integrate k8s cluster with GitLab (GitOps) & Deploy in-Cluster GitLab for K8s Development HOWTO (Developing for Kubernetes with k3s+GitLab): https://github.com/adavarski/k3s-GitLab-development
-Ref (Jenkins example): https://github.com/adavarski/jenkins-dev-environment
+- (GitLab example) : Integrate k8s cluster with GitLab (GitOps) & Deploy in-Cluster GitLab for K8s Development HOWTO (Developing for Kubernetes with k3s+GitLab): https://github.com/adavarski/k3s-GitLab-development
+- (Jenkins example): https://github.com/adavarski/jenkins-dev-environment & https://github.com/adavarski/PostGUI-k8s-demo & etc.
  
 Note: GitOps
 
@@ -1070,7 +1060,7 @@ If it works, you can see something similar to this screen capture.
   
 ### Appendix_3: Kubernetes Development cluster setup using kubeadm with WireGuard VPN on Hetzner Cloud (private networks, wireguard)
   
-Provision three CX31 cloud servers from Hetzner, each providing 2 CPUs, 2 GB memory, 80 GB of disk storage, running Ubuntu 20.04, and deployed in the Nuremberg region. Use Terraform hcloud module for VMs provisioning.
+Provision three CX31 (2 vCPUS / 8 GB RAM) cloud servers from Hetzner, running Ubuntu 20.04, and deployed in the Nuremberg region. Use Terraform module for CloudVMs provisioning.
 
 Small k8s develpoment cluster with a Master Node and two Worker Nodes example:
 
@@ -1195,7 +1185,7 @@ Note: DNS: Adding A records. add an additional A record k8s-cluster.dev1.example
 
 Use Teraform hcloud modles for CloudVMs provisioning:  https://github.com/hetznercloud/terraform-provider-hcloud
   
-Note: For Development Environment example: Three CX31 cloud servers from Hetzner, each providing 2 CPUs, 2 GB memory, 80 GB of disk storage, running Ubuntu 20.04, and deployed in the Nuremberg region.
+Note: For Development Environment example: Provision three CX31 (2 vCPUS / 8 GB RAM) cloud servers from Hetzner, running Ubuntu 20.04, and deployed in the Nuremberg region. Use Terraform module for CloudVMs provisioning.
 
 ```
 # k8s Master 
@@ -1505,7 +1495,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 
 Ref: https://github.com/kubernetes-sigs/kubespray
   
-Pre: Provision hcloud VMs using terraform/ansible/hcloud-cli and setup kubespray ansible inventory.
+Pre: Provision hcloud VMs using terraform/hcloud-cli/ansible and setup kubespray ansible inventory.
 
 Note: Three CX31 cloud servers from Hetzner running Ubuntu 20.04, and deployed in different locations, using hcloud terraform modules for CloudVMs provisioning.
 
