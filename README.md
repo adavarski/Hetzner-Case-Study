@@ -1497,7 +1497,7 @@ Now you should be able to deploy new applications with storage capability (volum
 
 
 # Install NGINX Ingress Controller
-
+```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
 
 ```
