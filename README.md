@@ -1,40 +1,37 @@
-# Hetzner Cloud: Case Study
+# Hetzner Cloud: Case Study/Research Solution Architecture
 
-Using Hetzner as Cloud provider (for VMs & Dedicated Servers hosting). We want to launch Kubernetes, ScyllaDB and some other services across Hetzner Dedicated (bare-metal) and Hetzner Cloud VMs. We have to list the challenges we can identify from the services provided by Hetzner Cloud (hcloud). Design the architecture for the environments. Key technologies and configurations setup, so that Kubernetes and other services could be deployed (especially take into account how you would build in security into the environments).
-
-Note: Hetzner is an inexpensive cloud services provider. Based in Germany, it offers great VPS (Hetzner Cloud VMs) servers and very cheap prices and also offers Hetzner Dedicated-Servers (bare-metal). We can use Hetzner Dedicated-Servers (bare-metal) for I/O intensive workloads/services which neededs huge amaount of IOPS (like OLTP DBs/DWHs/NoSQL DBs & Big Data/Data Lakes & Apache Spark & etc.). Hetzner is ideal for setting up a Kubernetes Clusters on VPS (Hetzner Cloud VMs)/Dedicated-Servers (bare-metal) and also Hetzner becomes a 100% Kubernetes solution resently (with features like k8s Hetzner Cloud Controller Manager & Hetzner Cloud Storage (CSI) and adding cloud native load balancer with Kubernetes support). 
-
-Ref: https://docs.hetzner.com/. 
+Using Hetzner as Cloud provider (for Cloud VMs & Dedicated Servers hosting). We want to launch Kubernetes, ScyllaDB and some other services across Hetzner Dedicated (bare-metal) and Hetzner Cloud VMs. We have to list the challenges we can identify from the services provided by Hetzner Cloud. Design the architecture for the environments. Research key technologies and configurations setup, so that Kubernetes and other services could be deployed (especially take into account how we would build environments security).
 
 
 =======================================================================
 
 # Objective: 
 
-Using Hetzner as Cloud provider for VMs & Dedicated server hosting. 
+Hetzner is an inexpensive cloud services provider. Based in Germany, it offers great VPS (Hetzner Cloud VMs) servers and very cheap prices and also offers Hetzner Dedicated-Servers (bare-metal). We can use Hetzner Dedicated-Servers (bare-metal) for I/O intensive workloads/services which neededs huge amaount of IOPS (like OLTP DBs/DWHs/NoSQL DBs & Big Data/Data Lakes & Apache Spark & etc.). Ref: https://docs.hetzner.com/. 
 
 Tasks:
 
 - List the challenges we can identify from the services provided by Hetzner.
 - Key technologies and configurations to setup (so that Kubernetes and other services could be deployed). 
-- Launch Kubernetes, ScyllaDB and some other services across dedicated (bare-metal) and Cloud VMs. Design outline the architecture for the environments. Take into account how you we build security into the environments
+- Launch Kubernetes, ScyllaDB and some other services across dedicated (bare-metal) and Cloud VMs. 
+- Design outline the architecture for the environments. Take into account how you we build security into the environments
 
 
 ## Prerequisites: Hetzner Cloud registration 
 
 Prepare your [Hetzner Account](https://accounts.hetzner.com/signUp) and get API token. 
 
-First thing you need is an Hetzner account (https://accounts.hetzner.com/signUp). It’ simple: sign-up, enter your credit card or PayPal and login to Hetzner UI/consle: https://accounts.hetzner.com/login
+First thing we need is an Hetzner account (https://accounts.hetzner.com/signUp). Sign-up, enter your credit card or PayPal and login to Hetzner UI/consle: https://accounts.hetzner.com/login
 
 
 ## List the challenges you can identify from the services provided by Hetzner
 
 Hetzner Cloud Chalenges: 
 
-- Network related : vSwitch & VLANS setup, DR/DRP setup, DNS setup, Load Balancers
+- Network related : vSwitch & VLANS setup, DR/DRP setup, DNS setup
 - Security related : VPNs setup, Firewalls setup
-- K8S related : k8s Hetzner Cloud Controller Manager & k8s Hetzner Cloud Storage (CSI) deploy/setup; k8s Clusters external access: Using Hetzner cloud native load balancer with Kubernetes support and using HCloud IP Floater + MetalLB + Hetzner Floating IP (k8s FIP controller) + k8s Ingress Controller.
-- ScyllaDB releated: Run ScyllaDB using k8s operator inside k8s cluster. Run ScyllaDB using hcloud VMs & Dedicated-Servers.
+- K8S related : k8s Hetzner Cloud Controller Manager & k8s Hetzner Cloud Storage (CSI) deploy/setup; k8s Clusters external access: Using Hetzner cloud native load balancer with Kubernetes support or using (OPTIONAL): HCloud IP Floater + MetalLB + Hetzner Floating IP (k8s FIP controller).
+- ScyllaDB releated: Run ScyllaDB using k8s operator inside k8s cluster. Run ScyllaDB using Cloud VMs/Dedicated-Servers.
 - (OPTIONAL) Virtualization related (ProxMox/VMWare) 
 
 See bellow design outlines/solutions.
@@ -43,9 +40,9 @@ See bellow design outlines/solutions.
 
 ### 1.1.Hetzner vSwitch: 
 
-Use Hetzner vSwitch to enable cloud and dedicated root servers to reach each other via their private network links (vSwith between VMs_to_Dedicated-Servers & Dedicated-Servers_to_Dedicated-Servers) 
+Use Hetzner vSwitch to enable cloud and dedicated root servers to reach each other via their private network links (vSwith between CloudVMs_to_Dedicated-Servers & Dedicated-Servers_to_Dedicated-Servers) 
 
-vSwitch Overview (summary):
+vSwitch Overview (Summary):
 
 <img src="pictures/0-hertzner-vswitch-architecture.jpg" width="500">
 
@@ -57,41 +54,39 @@ vSwitch example of a coupled configuration:
 
 <img src="pictures/0-hetzner-vSwitch.png" width="500">
 
-Use References: 
+For setup Hetzner vSwitch & Hetzner Cloud infrastructure use References: 
+
 - https://docs.hetzner.com/cloud/networks/connect-dedi-vswitch/ 
 - https://docs.hetzner.com/robot/dedicated-server/network/vswitch/ 
 - https://docs.hetzner.com/cloud/networks/server-configuration/) 
 
-for setup Hetzner vSwitch & Hetzner Cloud infrastructure. 
+### 1.2. DR/DRP setup : Hetzner Cloud
 
-### 1.2.Hetzner DR/DRP setup 
+Use Hetzner Cloud multiple location for infrastructure provisioning and for Disaster Recovery(DR). Create/test Disaster Recovery Procedures (DRP)
 
-Use all hcloud location for Disaster Recovery(DR) and create/test Disaster Recovery Procedures (DRP)
+Hetzner Cloud locations:
 
 - Data Center Park Nuremberg, Germany
 - Data Center Park Falkenstein, Germany
 - Data Center Park Helsinki, Finland
 
-Note: Provisioned the servers/VMs with terraform/ansible/hcloud-cli/etc. in all hcloud locations -> examples: ('nbg1', 'fsn1' or 'hel1'). 
+Note: Provisioned the servers/CloudVMs with IaC tools like terraform/ansible/hcloud-cli/etc. in multiple Hetzner Cloud locations -> examples: ('nbg1', 'fsn1' or 'hel1'). 
 
-### 1.3. Hetzner Cloud DNS related.
+### 1.3. DNS : Hetzner Cloud
 
 Configure DNS records for all Dedicated Servers/VMs/Load Balansers/k8s Ingress/etc.
 
 Ref: 
 - https://docs.hetzner.com/robot 
 - https://docs.hetzner.com/cloud/servers/cloud-server-rdns 
-- https://dns.hetzner.com
 
-Note: We can use ansible/teraform/hcloud-cli for IaC. 
-
-## 2.Security : Hetzner Cloud  (& home/on-prem infrastructure)
+## 2.Security : Hetzner Cloud  (& Home/On-Prem infrastructure)
 
 ### 2.1.VPNs 
 
-Note: VPN setup is OPTIONAL for Hetzner Cloud, because we will use only private networks and Hetzner vSwitch to enable cloud and dedicated root servers to reach each other via their private network links. We can use also OpenVPN, Pfsence (IPSEC & OpenVPN) for Hetzner Cloud <-> On-Prem/Home infrastructure.
+Note: VPN setup is OPTIONAL for Hetzner Cloud, because we will use only private networks and Hetzner vSwitch to enable cloud and dedicated root servers to reach each other via their private network links. We can use Wireguard, OpenVPN, Pfsence (IPSEC & OpenVPN), etc. for Hetzner Cloud <-> On-Prem/Home infrastructure.
 
-For better security we can use wireguard (VPN) for Hetzner Cloud: VM_to_VM/VMs_to_Dedicated-Servers and VMs&Dedicated_Servers(hcloud)_to_on-prem/home_servers&VMs
+Will use WireGuard VPN as example for better security for Hetzner Cloud infrastructucture: CloudVM_to_CloudVM/CloudVMs_to_Dedicated-Servers and CloudVMs&Dedicated_Servers_to_On-Prem/Home_Servers&VMs
 
 WireGuard is a fast, secure VPN, easy to install, configure, and route all internal/k8s clusters traffic through. We need to generating public and private keys for each server/VM, adding a WireGuard configuration file, starting the service. For k8s cluster we need to create/setup an overlay network to tunnel Kubernetes traffic through.
 
@@ -99,7 +94,7 @@ Wireguard setup with Hetzner Cloud & Home/On-Prem infrastructure (networks):
 
 <img src="pictures/1-wireguard-setup-network-diagram.png" width="600">
 
-Note1: For k8s inside hcloud we will use only private networks and wireguard for better security. We also will use hcloud Load Balancers MetalLB for k8s external access. Also we will use Hetzner Cloud Cloud Controller manager & Kubernetes Container Storage Interface driver(for Hetzner Cloud Volumes). 
+Note1: For k8s inside Hetzner Cloud we can use only private networks and wireguard (OPTIONAL) for better security. 
 
 Note2: For k8s development clusters we can use k3s. k3s is 40MB binary that runs “a fully compliant production-grade Kubernetes distribution” and requires only 512MB of RAM. k3s is a great way to wrap applications that you may not want to run in a full production Cluster but would like to achieve greater uniformity in systems deployment, monitoring, and management across all development operations. It is closer to a production style deployment. By default, K3s will run with flannel as the CNI, using VXLAN as the default backend. To change the flannel backend use --flannel-backend=wireguard option (Uses the WireGuard backend which encrypts network traffic. Require additional kernel modules and configuration). 
 
@@ -138,14 +133,15 @@ $ hcloud firewall add-rule k8s-nodes --protocol=udp --direction=in --source-ips 
 
 ## 3. Kubernetes: Hetzner Cloud 
 
+Hetzner is ideal for setting up a Kubernetes Clusters on VPS (Hetzner Cloud VMs)/Dedicated-Servers (bare-metal) and also Hetzner becomes a 100% Kubernetes solution resently (with features like k8s Hetzner Cloud Controller Manager & Hetzner Cloud Storage (CSI) and adding cloud native load balancer with Kubernetes support).
+
 Kubernetes is a container orchestration tool developed by Google which helps to deploy software solutions with complex architectures like microservices. Since its launch in 2014 it has experienced great growth and a it’s a key piece of many DevOps/Dev/QA/Production infrastructures. With Kubernetes (k8s) cluster management is very easy.
 
 Note: k8s clusters provisioning/deploy : 
 
 - kubespray/Rancher/RKE for k8s PRODUCTION clusters running on hcloud dedicated servers or VMs (we will use terraform/ansible(optional) for provisioning infrastructure) 
-- k3s (for k8s DEVELOPMENT/QA clusters/environments) or kubeadm-based/RKE-based/Rancher-based k8s clusters running on-prem/home or on hcloud dedicated servers/VMs 
+- k3s (for k8s DEVELOPMENT/QA clusters/environments) or kubeadm-based/RKE-based/Rancher-based k8s clusters running on Hetzner CloudVMs or Home/On-Prem infra. 
 - Use k8s Operators/Helm Charts/YAML manifests for creating k8s deployments/workloads (PaaS/SaaS services).
-
 
 ### 3.2. Deploy the Hetzner Cloud Controller Manager (CCM)
 In order to integrate with Hetzner Cloud they have developed a “Kubernetes Cloud Controller Manager”. This will need access to the Hetzner Cloud, so we need to create another API Token.
@@ -212,7 +208,6 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 ```
 
 #### 3.4.1.Using Hetzner cloud native load balancer with Kubernetes support
-
 
 We are going to create a Kubernetes cluster using Load Balancer service already available in Hetzner. Hetzner added a cloud native load balancer with Kubernetes support and becomes a 100% Kubernetes solution resently.
 
@@ -302,17 +297,13 @@ spec:
 
 #### 3.4.2.(OPTIONAL): HCloud IP Floater + MetalLB + Hetzner Floating IP (k8s FIP controller) + k8s Ingress Controller. 
 
-  
 Note1: NOT RECOMMENDED!, because Hetzner cloud has native load balancer with Kubernetes support. 
-Note2: If you don’t want to use the cloud native Hetzner Load Balance service, you can use the software solution MetalLB.
-To achieve a “LoadBalancer” service in an Hetzner Kubernetes cluster use a software solution like as MetalLB. 
+Note2: If you don’t want to use the cloud native Hetzner Load Balance service, you can use the software solution MetalLB. To achieve a “LoadBalancer” service in an Hetzner Kubernetes cluster use a software solution like as MetalLB. 
 Note3: 2 master k8s nodes in different regions/data centers
 
 <img src="pictures/2-hetzner-k8s-loadbalancer.png" width="600">
 
 A LoadBalancer is also a requirement to deploy an Ingress Resource implementation like NGINX, which you want to use for your Web traffic.
-
-Hetzner unfortunately doesn’t provide a LoadBalancer yet (load balancers are unable to be created automatically via the hcloud controller. Inside the pod, the hcloud controller has this message: ERROR: logging before flag.Parse: E0923 14:15:19.086458 1 controllermanager.go:240] Failed to start service controller: the cloud provider does not support external load balancers). This is why we need to get a bit more creative using the things we have.
 
 One key aspect is the floating ip, which will represent our public IP address for the LoadBalancer. But how can we setup the LoadBalancer? This is where MetalLB takes the stage. It needs just some public IPs to hand out and implements a LoadBalancer using standard routing mechanisms. But Hetzner doesn’t support handing out IPs from outside its reach, it only supports assigning it to one node (floating ip). So we will use only that one floating IP from Hetzner for reasonable price. That floating IP can only be assigned to one node, but what happens, when that node goes down for whatever reason? Yes, all applications on that public IP won’t be available. Bummer! Thanks to C.Beneke there is hope. The hcloud fip controller checks if any node goes down and assignes that floating ip to a running node, thus saving us from down-time!
 
@@ -450,7 +441,7 @@ spec:
 EOF
 ```
 
-Now we can deploy Ingress resources and pointing our browser to http://<floating-ip-address>/<whatever>, we will see that deployed page/application.
+Now we can deploy Ingress resources and pointing our browser to http://<floating-ip-address>/<whatever>, we will see that deployed application.
 
 But we don’t like entering IP addresses to browsers, which is why there is DNS. 
 
@@ -463,7 +454,10 @@ Ref:
 
 We want to launch Kubernetes, ScyllaDB and some other services across dedicated (bare-metal) and Cloud VMs. Create an outline how you would design the architecture for the environment, which key technologies and configurations you would setup so that Kubernetes and other services could be deployed. Especially take into account how you would build in security into the environment
 
-(Ref: https://github.com/hetznercloud & https://github.com/hetznercloud/awesome-hcloud: List of awesome libraries, tools, and integrations for Hetzner Cloud)
+Ref: 
+  
+- https://github.com/hetznercloud 
+- https://github.com/hetznercloud/awesome-hcloud: List of awesome libraries, tools, and integrations for Hetzner Cloud)
 
 ### 4.1. IaC & CM: terraform & ansible & hcloud-cli
 
@@ -483,14 +477,14 @@ ansible-playbook -i inventory/hosts.ini setup-environment.yml
 
 ### 4.2.k8s on Hetzner Cloud: 
 
-Note: k8s clusters provisioning/deploy : 
+k8s clusters provisioning/deploy : 
 
-- Kubespray/Rancher for k8s PRODUCTION clusters provisioning on hcloud dedicated servers/VMs 
-- k3s (for k8s DEVELOPMENT/QA clusters/environments) or kubeadm-based/Rancher-based/RKE-based k8s clusters running on hcloud dedicated servers/VMs or on-prem/home infrastructure
-- We will use terraform/ansible(optional) for provisioning infrastructure 
+- Kubespray/Rancher for k8s PRODUCTION clusters provisioning on Hetzner CloudVMs.
+- k3s (for k8s DEVELOPMENT/QA clusters/environments) or kubeadm-based/Rancher-based/RKE-based k8s clusters running on Hetzner CloudVMs or On-Prem/Home infrastructure
+- We will use terraform/ansible(OPTIONAL) for provisioning infrastructure 
 - We will us k8s Operators/Helm Charts/YAML manifests for creating k8s deployments/workloads (for PaaS/SaaS services).
 
-Note: Use https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs to provision k8s servers/VMs on hcloud 
+Note: Use https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs to provision k8s CloudVMs
 
 See Appendixes for k3s-base, kubeadm-based, ranchier-based DEVELOPMENT k3s clusters provisioning/setup && kubespray/ranchier for PRODUCTION k3s clusters provisioning/setup.
 
@@ -501,9 +495,9 @@ See Appendixes for k3s-base, kubeadm-based, ranchier-based DEVELOPMENT k3s clust
 - Appendix_5: hcloud k8s Production Ready Kubernetes Clusters setup using kubespray (2 k8s Mastes in different regions) 
 
 
-## 5.Virtualization options for k8s/etc. on Hetzner Cloud (OPTIONAL) - Proxmox & Vmware on dedicated hcloud server (for dev/qa)
+## 5.Virtualization options for k8s/etc. on Hetzner Cloud (OPTIONAL) - Proxmox & Vmware on Dedicated Servers (for dev/qa)
 
-Note: We can use some virtualization on hcloud Dedicated Servers(bare-metal)
+We can use some virtualization on Hetzner Cloud Dedicated Servers(bare-metal)
 
 ### 5.1.Proxmox on hcloud (k8s VMs on ProxMox:masters&workers): 
 
@@ -514,7 +508,7 @@ https://github.com/adavarski/proxmox-terraform-k8s
 
 Note: ProxMox (for DEV clusters): We can create VMs with Terraform and after that setup ansible inventory with IPs of VMs, and create k8s cluster with Kubespray (REF: https://github.com/kubernetes-sigs/kubespray) or using ansible playbooks with kubeadm.
 
-### 5.2.VMWARE (ESXi or VSchere) on dedicated server (k8s VMs on VMWARE :masters&workers)
+### 5.2.VMWARE (ESXi or VSchere) on dedicated server (k8s VMs on VMWARE:masters&workers)
 
 https://docs.hetzner.com/robot/dedicated-server/virtualization/vmware-esxi/
 https://community.hetzner.com/tutorials/install-and-configure-vmware-vsphere
@@ -526,37 +520,16 @@ Note: We need some licenses for vSphere if we want to use Terraform, because Ter
 ### 5.3.Vagrant+VirtualBox/KVM (for DEV clusters) running on a single dedicated hcloud server.
 
 Note1:  KVM is hard to support
-Note2:  MetalLB (https://metallb.universe.tf/: MetalLB is a load-balancer implementation for bare metal Kubernetes clusters) will be very hard to be hacked with such Vagrant+VirtualBox/KVM setups. 
-
-Examples:
-
-#### 5.3.1. Vagrant+VirtualBox:
-
-- https://github.com/adavarski/k8s-UAP/tree/main/k8s#kubespray-ha-2-masters (based on https://github.com/kubernetes-sigs/kubespray/blob/master/Vagrantfile)
-- https://github.com/adavarski/k8s-ansible-kubeadm-addons-helm-metallb (Note: old, need to check)
-- etc. in my repos
-
-#### 5.3.2. KVM example:
-
-- https://github.com/adavarski/packer-terraform-kvm-ansible-k8s-FINAL (Note: old, need to check)
-
-#### 5.3.3.Rancher/RKE:
-
-##### 5.3.3.1 Rancher + Vagrant&VirtualBox
-
-- https://github.com/adavarski/rancher2-vagrant-alpine (Note: old, need to check)
-
-##### 5.3.4.RKE on KVM
-- https://github.com/adavarski/RKE-rancher-kvm) (Note: old, need to check)
-
+Note2:  MetalLB (https://metallb.universe.tf/: MetalLB is a load-balancer implementation for bare metal Kubernetes clusters will be very hard to be hacked with such Vagrant+VirtualBox/KVM setups. 
 
 ## 6.ScyllaDB
 
-We will use k8s operator for this and deploy ScyllaDB on k8s  : Ref: [Apppendix 6](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#Appendix_6-scylla-on-k8s)
+We will use k8s operator for this and deploy ScyllaDB on k8s. Ref: [Apppendix 6](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#Appendix_6-scylla-on-k8s) for details.
 
 ## 7. CI/CD: GitLab/Jenkins/etc.
 
-Note: GitLab can be integrated (Add existing k8s cluster) with kubernetes versions < v1.19. Gitlab can be run inside k8s or on VM/Dedicated Server.
+  
+GitLab can be integrated (Add existing k8s cluster) with kubernetes versions < v1.19. Gitlab can be run inside k8s or on CloudVM/Dedicated Server.
 
 GitLab supports the following Kubernetes versions, and you can upgrade your Kubernetes version to any supported version at any time:
 
@@ -566,15 +539,15 @@ GitLab supports the following Kubernetes versions, and you can upgrade your Kube
 
 The helm tiller can't be installed in kubernetes v1.18.+ because is not supported Gitlab versions (helm tiller install issue, and helm is needed for all the other GitLab sub apps depend on Helm Tiller: you cannot use cert manager, ingress, etc.) :
 
-Ref: Integrate k8s cluster with GitLab (GitOps) & Deploy in-Cluster GitLab for K8s Development HOWTO (Developing for Kubernetes with k3s+GitLab): https://github.com/adavarski/k3s-GitLab-development
-
+Ref (GitLab example) : Integrate k8s cluster with GitLab (GitOps) & Deploy in-Cluster GitLab for K8s Development HOWTO (Developing for Kubernetes with k3s+GitLab): https://github.com/adavarski/k3s-GitLab-development
+Ref (Jenkins example): https://github.com/adavarski/jenkins-dev-environment
+ 
 Note: GitOps
 
 New concepts like GitOps aim to completely manage the active configuration state directly with Git. GitOps, a process popularized by Weaveworks, is another trending concept within the scope of Kubernetes CI/CD. GitOps involves the use of applications reacting to git push events. GitOps focuses primarily on Kubernetes clusters matching the state described by configuration (www.weave.works/technologies/gitops/ ; www.gitops.tech/) residing in a Git repository. On a simplistic level, GitOps aims to replace kubectl apply with git push. Popular and well-supported GitOps implementations include ArgoCD, Flux, and Jenkins X, GitLAb. GitLab k8s integration supports GitOps.
 
 GitOps, a process popularized by Weaveworks, is another trending concept within the scope of Kubernetes CI/CD. GitOps involves the use of applications reacting to git push events. GitOps focuses primarily on Kubernetes clusters matching the state described by configuration residing in a Git repository. On a simplistic level, GitOps aims to replace kubectl apply with git push. Popular and well-supported GitOps implementations include GitLab, ArgoCD, Flux, and Jenkins X. Argo CD (GitOps): We can configure argo to run deployments for us instead of kubectl apply -f. 
 
-Ref: https://github.com/adavarski/k3s-GitLab-development & https://github.com/adavarski/jenkins-dev-environment
 
 ### Appendix_1: k8s development cluster install/setup using k3s (withoud WireGuard, only private network) 
 
