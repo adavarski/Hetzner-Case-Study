@@ -960,7 +960,7 @@ After that, we can create a cluster as the following:
 1 Worker node named “worker” with CX31 template based.
 Press “Create” and the magic starts!
 During the process, Rancher will notify you about the events. If you are logged into Hetzer, you can see how automatically the VM are created.
-After several minutes… Congrats! Your cluster is up :)  
+After several minutes… Cluster is up :)  
   
 <img src="pictures/ranchier-prod-create-cluster-final-output-dashboard-main.png" width="600">
 
@@ -1056,7 +1056,7 @@ If it works, you can see something similar to this screen capture.
   
 <img src="pictures/ranchier-hcloud-ui-lb-status.png" width="600">
 
-- Free SSL certificate for your Kubernetes cluster with Rancher (OPTIONAL): ref: https://jmrobles.medium.com/free-ssl-certificate-for-your-kubernetes-cluster-with-rancher-2cf6559adeba   
+- Free SSL certificate for your Kubernetes cluster with Rancher (OPTIONAL)
   
 ### Appendix_3: Kubernetes Development cluster setup using kubeadm with WireGuard VPN on Hetzner Cloud (private networks, wireguard)
   
