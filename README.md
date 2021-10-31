@@ -501,11 +501,7 @@ Note: Use https://registry.terraform.io/providers/hetznercloud/hcloud/latest/doc
 
 See Appendixes for k3s-base, kubeadm-based, Ranchier-based DEVELOPMENT k3s clusters provisioning/setup && Kubespray/Ranchier for PRODUCTION k3s clusters provisioning/setu examples.
 
-### Appendix_1: k3s-based Kubernetes development cluster on Hetzner Cloud (private network) 
-### Appendix_2: Rancher-based Kubernetes Development cluster on Hetzner Cloud  (private network)
-### Appendix_3: Kubernetes Development cluster setup using kubeadm with WireGuard VPN on Hetzner Cloud (private networks, wireguard)
-### Appendix_4: Kubernetes Development cluster setup using kubeadm with WireGuard VPN on Hetzner Cloud (private networks)
-### Appendix_5: Kubespray-based Production Ready Kubernetes Clusters on Hetzner Cloud (2 k8s Mastes in different locations) 
+
 
 
 ## 5.Virtualization options for k8s/etc. on Hetzner Cloud (OPTIONAL) - Proxmox & Vmware on Dedicated Servers (for dev/qa)
@@ -537,7 +533,7 @@ Note2:  MetalLB (https://metallb.universe.tf/: MetalLB is a load-balancer implem
 
 ## 6.ScyllaDB
 
-We will use k8s operator for this and deploy ScyllaDB on k8s. See Appendix_6: ScyllaDB on k8s for details.
+We will use k8s operator for this and deploy ScyllaDB on k8s. See [Appendix_6: ScyllaDB](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#appendix_7-scylladb-on-k8s) on k8s for details.
 
 ## 7. CI/CD: GitLab/Jenkins/etc.
   
