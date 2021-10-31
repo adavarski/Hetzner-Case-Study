@@ -1510,7 +1510,6 @@ Pre: Provision hcloud VMs using terraform/ansible/hcloud-cli and setup kubespray
 
 Note: Three CX31 cloud servers from Hetzner running Ubuntu 20.04, and deployed in different locations, using hcloud terraform modules for CloudVMs provisioning.
 
-
 ```
 $ git clone https://github.com/kubernetes-sigs/kubespray
 $ sudo yum install python-pip; sudo pip install --upgrade pip; 
@@ -1572,7 +1571,7 @@ logstash-1594282961     	default  	1       	2020-07-09 11:22:45.049385698 +0300 
 postgresql-1594282655   	default  	1       	2020-07-09 11:17:38.550513366 +0300 EEST	deployed	postgresql-8.6.4   	11.7.0     
 telegraf-1594282866     	default  	1       	2020-07-09 11:21:09.59958005 +0300 EEST 	deployed	telegraf-1.6.1     	1.12       
 ```
-
+  
 ### Appendix_6: ScyllaDB on k8s 
 
 Scylla is an open-source distributed NoSQL wide-column data store. It was designed to be compatible with Apache Cassandra while achieving significantly higher throughputs and lower latencies. It supports the same protocols as Cassandra (CQL and Thrift) and the same file formats (SSTable), but is a completely rewritten implementation, using the C++20 language replacing Cassandra's Java, and the Seastar asynchronous programming library with threads, shared memory, mapped files, and other classic Linux programming techniques. In addition implementing Cassandra's protocols, Scylla also implements the Amazon DynamoDB API.
