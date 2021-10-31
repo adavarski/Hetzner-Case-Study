@@ -92,7 +92,7 @@ WireGuard is a fast, secure VPN, easy to install, configure, and route all inter
 
 Wireguard setup with Hetzner Cloud & Home/On-Prem infrastructure (networks):
 
-<img src="pictures/1-wireguard-setup-network-diagram.png" width="600">
+<img src="pictures/1-wireguard-setup-network-diagram.png" width="500">
 
 Note1: For k8s inside Hetzner Cloud we can use only private networks and wireguard (OPTIONAL) for better security. 
 
