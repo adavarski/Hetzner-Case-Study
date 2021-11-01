@@ -83,9 +83,9 @@ Ref:
 
 ## 2.Security : Hetzner Cloud  (& Home/On-Prem infrastructure)
 
-### 2.1.VPNs 
+For Hetzner Cloud (private cloud internal infrastructure: Networks / CloudVM & Dedicated Servcies), we will use only private networks and Hetzner vSwitch to enable cloud and dedicated root servers to reach each other via their private network links. Actually we can use Hetzner Cloud to build our own Privite Cloud on top of it (using only Hetzner Cloud internal networks/IPs/etc.), and use Hetzner Cloud Load Balancers/VPNs/CloudVMs(VPSs) with HAProxy/CloudVM(Bastion host). for external access to our internall Private Cloud workloads/apps/k8s api/k8s ingress/private networks/VPSs/Dedicated Servers/etc. and DNS for theese entrypoint.
 
-VPN setup is optional for Hetzner Cloud (private cloud internal infrastructure: Networks / CloudVM & Dedicated Servcies), because we will use only private networks and Hetzner vSwitch to enable cloud and dedicated root servers to reach each other via their private network links. Actually we can use Hetzner Cloud to build our own Privite Cloud on top of it (using only Hetzner Cloud internal networks/IPs/etc.), and use Hetzner Cloud Load Balancers/VPNs/CloudVMs(VPSs) with HAProxy/CloudVM(Bastion host). for external access to our internall Private Cloud workloads/apps/k8s api/k8s ingress/private networks/VPSs/Dedicated Servers/etc. and DNS for theese entrypoint.
+### 2.1.VPNs 
 
 We can use Wireguard, OpenVPN, Pfsence (IPSEC & OpenVPN), etc. for Hetzner Cloud external access <-> On-Prem/Home infrastructure.
 
@@ -134,7 +134,7 @@ Test: When connected to the OpenVPN server(VPC) with the OpenVPN client (from ho
 servers which are part of the Hetzner private cloud (10.0.0.10 & any ones dedicated servers & VPCs). 
 ```
 
-- #### WireGuard: External access to Hetzner private cloud & Setup VPN for Hetzner private cloud (OPTIONAL: better internal private cloud security).
+- #### WireGuard: External access to Hetzner private cloud & Setup VPN for Hetzner Cloud:private networks (OPTIONAL: for better internal private cloud security).
 
 WireGuard is a fast, secure VPN, easy to install, configure, and route all internal/k8s clusters traffic through. We need to generating public and private keys for each server/VM, adding a WireGuard configuration file, starting the service. For k8s cluster we need to create/setup an overlay network to tunnel Kubernetes traffic through.
 
@@ -160,9 +160,11 @@ Example: Generate a graph of the Kilo network in Graphviz format "kgctl graph | 
 
 Note4: We can use for external access to k8s API(6443) (via kubectl/etc.) and any other internal services (DBs/etc. running on Hetzner Dedicated Servers) via CloudVM+HAproxy/nginx (we can use only private networks at Hetzner Cloud, for better security). CloudVM(HAProxy) with public IP and private IPs, and Hetzner Firewall conigured for CloudVM(VPC). CloudVM(VPC) has to be configured to access all/needed private networks. We can include all Hetzner dedicated servers in all Hetzner Cloud Networks ---> Connect your Robot vSwitch (dedicated root servers) with your Hetzner Cloud Network/s. Create a new subnet in your Cloud Network and select the "Enable dedicated server vSwitch connection" checkbox. (Ref: https://docs.hetzner.com/cloud/networks/faq/). We can use Hetzner Cloud Load Balancer to access k8s Services/Apps/Workloads (k8s Ingress: Hetzner Cloud Load Balancer is k8s native) and other internel private cloud services/workloads (DBs/etc. running on Hetzner Dedicated Servers).
 
-### 2.2. Firewalls: Setup firewall rules via shell scripts, using hcloud-cli util.
+### 2.2. Firewalls  
 
-Example(k8s-related):
+We can setup firewalls via terraform/ansible/hcloud-cli.
+
+Setup firewall rules via shell scripts, using hcloud-cli util example(k8s-related):
 ```
 ### Example1:
 hcloud firewall create --name firewall-kubernetes
