@@ -85,11 +85,11 @@ Ref:
 
 ### 2.1.VPNs 
 
-Note: VPN setup is OPTIONAL for Hetzner Cloud (internal infrastructure: Networks / CloudVM & Dedicated Servcies), because we will use only private networks and Hetzner vSwitch to enable cloud and dedicated root servers to reach each other via their private network links. 
+Note: VPN setup is OPTIONAL for Hetzner Cloud (private cloud internal infrastructure: Networks / CloudVM & Dedicated Servcies), because we will use only private networks and Hetzner vSwitch to enable cloud and dedicated root servers to reach each other via their private network links. 
 
 We can use Wireguard, OpenVPN, Pfsence (IPSEC & OpenVPN), etc. for Hetzner Cloud external access <-> On-Prem/Home infrastructure.
 
-- #### OpenVPN/pfSense(OpenVPN)
+- #### OpenVPN/pfSense(OpenVPN): External access to Hetzner private cloud
 
 OpenVPN is an open-source project created by James Yonan and was released back in 2002. OpenVPN provides a high level of security using point-to-point or site-to-site connections with custom security protocol.
 
@@ -134,11 +134,11 @@ Test: When connected to the OpenVPN server(VPC) with the OpenVPN client (from ho
 servers which are part of the Hetzner private cloud (10.0.0.10 & any ones dedicated servers & VPCs). 
 ```
 
-- #### WireGuard
-
-Will use WireGuard VPN as example for better security for Hetzner Cloud infrastructucture: CloudVM_to_CloudVM/CloudVMs_to_Dedicated-Servers and CloudVMs&Dedicated_Servers_to_On-Prem/Home_Servers&VMs
+- #### WireGuard: External access to Hetzner private cloud & Setup VPN for Hetzner private cloud (for better internal private cloud security).
 
 WireGuard is a fast, secure VPN, easy to install, configure, and route all internal/k8s clusters traffic through. We need to generating public and private keys for each server/VM, adding a WireGuard configuration file, starting the service. For k8s cluster we need to create/setup an overlay network to tunnel Kubernetes traffic through.
+
+WireGuard VPN as example for better security for Hetzner Cloud infrastructucture: CloudVM_to_CloudVM/CloudVMs_to_Dedicated-Servers and CloudVMs&Dedicated_Servers_to_On-Prem/Home_Servers&VMs
 
 Wireguard setup with Hetzner Cloud & Home/On-Prem infrastructure (networks):
 
