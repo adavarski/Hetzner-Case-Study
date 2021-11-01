@@ -1565,9 +1565,9 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 
 Ref: https://github.com/kubernetes-sigs/kubespray
   
-Pre: Provision hcloud VMs using terraform/hcloud-cli/ansible and setup kubespray ansible inventory.
+Setup kubespray ansible inventory.
 
-Note1: Provisioning 3 x ccx42 (k8s masters:different locations) & 5 x ccx52 (k8s workers:different locations) and provisioning k8s cluster using Kubespray.
+Note: Provisioning 3 x ccx42 (k8s masters:different locations) & 5 x ccx52 (k8s workers:different locations) and provisioning k8s cluster using Kubespray. We can use also VPSs for k8s and provisionig them via terraform.
   
   
 ```
