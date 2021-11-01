@@ -130,8 +130,8 @@ keepalive 10 120
 cipher AES-256-CBC
 user nobody
 
-Test: When connected to the OpenVPN server with the OpenVPN client(from home for example), we want to be able to access (ssh/etc.) the other servers which are part of the Hetzner private cloud (10.0.0.10 & any ones dedicated servers & VPCs), access to those servers from the one cloud openvpn server.
-
+Test: When connected to the OpenVPN server(VPC) with the OpenVPN client (from home for example), we want to be able to access (ssh/etc.) the other 
+servers which are part of the Hetzner private cloud (10.0.0.10 & any ones dedicated servers & VPCs). 
 ```
 
 - #### WireGuard
