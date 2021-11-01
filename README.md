@@ -564,16 +564,18 @@ Ref:
 - https://docs.hetzner.com/robot/dedicated-server/virtualization/vmware-esxi/
 - https://github.com/adavarski/k8s-vmware-terraform-kubespray (with MetalLB for k8s Ingress)
 
-Note: We need some licenses for vSphere if we want to use Terraform, because Terraform modules need VMWare vSphere installation and setup. Also I've not been using VMWARE for more than 10 years actively, because I prefer open source private clouds (OpenStack, Apache CloudStack, etc.)
+Note: We need some licenses for vSphere if we want to use Terraform, because Terraform modules need VMWare vSphere installation and setup. 
 
 ### 5.3.Vagrant+VirtualBox/KVM (for DEV k8s clusters) running on a single Hetzner Cloud Dedicated Server.
 
 Note1:  KVM is hard to support
+  
 Note2:  MetalLB (https://metallb.universe.tf/: MetalLB is a load-balancer implementation for bare metal Kubernetes clusters will be very hard to be hacked with such Vagrant+VirtualBox/KVM setups. 
 
 ## 6.ScyllaDB
 
-We will use k8s operator for this and deploy ScyllaDB on k8s. 
+We will use k8s operator for this and deploy ScyllaDB on k8s.
+  
 See [Appendix_6: ScyllaDB on k8s](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#appendix_7-scylladb-on-k8s) for details.
 
 ## 7. CI/CD: GitLab/Jenkins/etc.
