@@ -538,7 +538,7 @@ See Appendixes for k3s-base, kubeadm-based, Ranchier-based DEVELOPMENT k3s clust
 - [Appendix_2: Rancher-based Kubernetes Development cluster on Hetzner Cloud  (private network)](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#appendix_2--rancher-based-kubernetes-development-cluster-on-hetzner-cloud--private-network)
 - [Appendix_3: Kubernetes Development cluster setup using kubeadm with WireGuard VPN on Hetzner Cloud (private networks, wireguard)](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#appendix_3-kubernetes-development-cluster-setup-using-kubeadm-with-wireguard-vpn-on-hetzner-cloud-private-networks-wireguard-1)
 - [Appendix_4: k3s-based Kubernetes development cluster with WireGard VPN on Hetzner Cloud (private network, wireguard setup)](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#appendix_4--k3s-based-kubernetes-development-cluster-with-wiregard-vpn-on-hetzner-cloud-private-network-wireguard-setup)
-- [Appendix_5: Kubernetes Development cluster setup using kubeadm with WireGuard VPN on Hetzner Cloud (private networks)](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#appendix_5-kubernetes-development-cluster-setup-using-kubeadm-with-wireguard-vpn-on-hetzner-cloud-private-networks)
+- [Appendix_5: Kubernetes Development cluster setup using kubeadm on Hetzner Cloud (private networks)](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#appendix_5-kubernetes-development-cluster-setup-using-kubeadm-with-wireguard-vpn-on-hetzner-cloud-private-networks)
 - [Appendix_6: Kubespray-based Production Ready Kubernetes Clusters on Hetzner Cloud (2 k8s Mastes in different locations)](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#appendix_6-kubespray-based-production-ready-kubernetes-clusters-on-hetzner-cloud-2-k8s-mastes-in-different-locations) 
 
 
@@ -1322,7 +1322,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 
 ```
 
-### Appendix_5: Kubernetes Development cluster setup using kubeadm with WireGuard VPN on Hetzner Cloud (private networks)
+### Appendix_5: Kubernetes Development cluster setup using kubeadm on Hetzner Cloud (private networks)
 
 ```
 # Install the hcloud cli utility
