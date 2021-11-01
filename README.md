@@ -144,7 +144,7 @@ Wireguard setup with Hetzner Cloud & Home/On-Prem infrastructure (networks):
 
 <img src="pictures/1-wireguard-setup-network-diagram.png" width="500">
 
-Note1: For k8s inside Hetzner Cloud we can use only private networks and wireguard (OPTIONAL) for better security. 
+Note1: For k8s inside Hetzner Cloud we can use only private networks and wireguard is OPTIONAL for better security. 
 
 Note2: For k8s development clusters we can use k3s. k3s is 40MB binary that runs “a fully compliant production-grade Kubernetes distribution” and requires only 512MB of RAM. k3s is a great way to wrap applications that you may not want to run in a full production Cluster but would like to achieve greater uniformity in systems deployment, monitoring, and management across all development operations. It is closer to a production style deployment. By default, K3s will run with flannel as the CNI, using VXLAN as the default backend. To change the flannel backend use --flannel-backend=wireguard option (Uses the WireGuard backend which encrypts network traffic. Require additional kernel modules and configuration). 
 
@@ -157,6 +157,8 @@ The topology and configuration of a Kilo network (Wireguard full network connect
 Example: Generate a graph of the Kilo network in Graphviz format "kgctl graph | circo -Tsvg > cluster.svg"
 
 <img src="pictures/kilo-wireguard.svg" width="500">
+
+Note4: We can use for external access to k8s API(6443) (via kubectl/etc.) and any other internal services (DBs/etc. running on Hetzner Dedicated Servers) via CloudVM+HAproxy/nginx (we use only private networks at Hetzner Cloud, for better security). CloudVM(HAProxy) is configured to access all private networks used. We can include all Hetzner dedicated servers in all Hetzner Cloud Networks ---> Connect your Robot vSwitch (dedicated root servers) with your Hetzner Cloud Network/s. Create a new subnet in your Cloud Network and select the "Enable dedicated server vSwitch connection" checkbox. (Ref: https://docs.hetzner.com/cloud/networks/faq/)
 
 ### 2.2. Firewalls: Setup firewall rules via shell scripts, using hcloud-cli util.
 
@@ -597,7 +599,7 @@ Production k8s cluster network overview:
   
 Note1: Use 3 x ccx42 (k8s masters) & 2 x ccx52 (k8s workers) and provisioning k8s cluster using Kubespray or Rancher
 
-Note2: External access to k8s API(6443) (via kubectl/etc.) and any other internal services (DBs/etc.) via CloudVM+HAproxy/nginx (we use only private networks at Hetzner Cloud, for better security). CloudVM(HAProxy) is configured to access all private networks used. We can include all Hetzner dedicated servers in all Hetzner Cloud Networks ---> Connect your Robot vSwitch (dedicated root servers) with your Hetzner Cloud Network/s. Create a new subnet in your Cloud Network and select the "Enable dedicated server vSwitch connection" checkbox. (Ref: https://docs.hetzner.com/cloud/networks/faq/)
+Note2: External access to k8s API(6443) (via kubectl/etc.) and any other internal services (DBs/etc. running on Hetzner Dedicated Servers) via CloudVM+HAproxy/nginx (we use only private networks at Hetzner Cloud, for better security). CloudVM(HAProxy) is configured to access all private networks used. We can include all Hetzner dedicated servers in all Hetzner Cloud Networks ---> Connect your Robot vSwitch (dedicated root servers) with your Hetzner Cloud Network/s. Create a new subnet in your Cloud Network and select the "Enable dedicated server vSwitch connection" checkbox. (Ref: https://docs.hetzner.com/cloud/networks/faq/)
 
 ## 5.Virtualization options for k8s/etc. on Hetzner Cloud (OPTIONAL) - Proxmox & Vmware on Dedicated Servers (for Dev/QA k8s clusters/etc.)
 
