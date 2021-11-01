@@ -548,8 +548,7 @@ Production k8s cluster network overview:
   
 Note1: Use 3 x ccx42 (k8s masters) & 2 x ccx52 (k8s workers) and provisioning k8s cluster using Kubespray or Rancher
 
-Note2: External access to k8s API (6443): kubectl/etc. and any other services via CloudVM+HAproxy/nginx (we use only private networks at Hetzner Cloud, for better security). CloudVM is configured to access all private networks used. We Can include all Hetzner dedicated servers in all Hetzner Cloud Networks?
-Connect your Robot vSwitch (dedicated root servers) with your Hetzner Cloud Networks. Create a new subnet in your Cloud Network and select the "Enable dedicated server vSwitch connection" checkbox.  
+Note2: External access to k8s API(6443) (via kubectl/etc.) and any other internal services (DBs/etc.) via CloudVM+HAproxy/nginx (we use only private networks at Hetzner Cloud, for better security). CloudVM(HAProxy) is configured to access all private networks used. We can include all Hetzner dedicated servers in all Hetzner Cloud Networks ---> Connect your Robot vSwitch (dedicated root servers) with your Hetzner Cloud Network/s. Create a new subnet in your Cloud Network and select the "Enable dedicated server vSwitch connection" checkbox. (Ref: https://docs.hetzner.com/cloud/networks/faq/)
 
 ## 5.Virtualization options for k8s/etc. on Hetzner Cloud (OPTIONAL) - Proxmox & Vmware on Dedicated Servers (for Dev/QA k8s clusters/etc.)
 
