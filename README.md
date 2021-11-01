@@ -543,7 +543,7 @@ See Appendixes for k3s-base, kubeadm-based, Ranchier-based DEVELOPMENT k3s clust
 
 Production k8s cluster network overview:
   
-<img src="pictures/k8s-production-network-overview.png" width="600">
+<img src="pictures/k8s-production-network-overview.png" width="800">
   
 Note: Use 3 x ccx42 (k8s masters) & 2 x ccx52 (k8s workers) and provisioning k8s cluster using Kubespray or Rancher
 
