@@ -95,6 +95,42 @@ OpenVPN is an open-source project created by James Yonan and was released back i
 
 We can create CloudVM (with public IP & OpenVPN settuped) to access all private networks (CloudVMs&Dedicated Servers). We can include all Hetzner dedicated servers in all Hetzner Cloud Networks ---> Connect your Robot vSwitch (dedicated root servers) with your Hetzner Cloud Networks. Create a new subnet in your Cloud Network and select the "Enable dedicated server vSwitch connection" checkbox (Ref: https://docs.hetzner.com/cloud/networks/faq/). So we can access all private networks/CloudVMs/Dedicated Servers via OpenVPN connection form home/on-prem. 
 
+Example:
+```
+CloudVPC (VPC) public IP: XX.XX.XX.XX 
+
+Hetzner Cloud private network: 10.0.0.0/16 (IP Range in Hetzner)
+
+Hetzner Cloud private network subnet: 10.0.0.0/24
+
+OpenVPN VPS: 10.0.0.3
+
+Server1 IP: 10.0.0.2
+
+openvpn.conf
+
+local XX.XX.XX.XX
+port 1194
+proto udp
+dev tun
+ca ca.crt
+cert server.crt
+key server.key
+dh dh.pem
+auth SHA512
+tls-crypt tc.key
+topology subnet
+server 10.0.0.0 255.255.255.0
+ifconfig-pool-persist ipp.txt
+push "redirect-gateway def1 bypass-dhcp"
+push "dhcp-option DNS 8.8.8.8"
+push "dhcp-option DNS 8.8.4.4"
+keepalive 10 120
+cipher AES-256-CBC
+user nobody
+
+```
+
 #### WireGuard
 
 Will use WireGuard VPN as example for better security for Hetzner Cloud infrastructucture: CloudVM_to_CloudVM/CloudVMs_to_Dedicated-Servers and CloudVMs&Dedicated_Servers_to_On-Prem/Home_Servers&VMs
