@@ -58,7 +58,7 @@ For setup Hetzner vSwitch & Hetzner Cloud infrastructure use References:
 
 - https://docs.hetzner.com/cloud/networks/connect-dedi-vswitch/ 
 - https://docs.hetzner.com/robot/dedicated-server/network/vswitch/ 
-- https://docs.hetzner.com/cloud/networks/server-configuration/) 
+- https://docs.hetzner.com/cloud/networks/server-configuration/ 
 
 ### 1.2. DR/DRP setup : Hetzner Cloud
 
