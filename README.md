@@ -89,7 +89,7 @@ Note: VPN setup is OPTIONAL for Hetzner Cloud (internal infrastructure: Networks
 
 We can use Wireguard, OpenVPN, Pfsence (IPSEC & OpenVPN), etc. for Hetzner Cloud external access <-> On-Prem/Home infrastructure.
 
-- #### OpenVPN/pFsence(OpenVPN)
+- #### OpenVPN/pfSense(OpenVPN)
 
 OpenVPN is an open-source project created by James Yonan and was released back in 2002. OpenVPN provides a high level of security using point-to-point or site-to-site connections with custom security protocol.
 
