@@ -85,7 +85,15 @@ Ref:
 
 ### 2.1.VPNs 
 
-Note: VPN setup is OPTIONAL for Hetzner Cloud, because we will use only private networks and Hetzner vSwitch to enable cloud and dedicated root servers to reach each other via their private network links. We can use Wireguard, OpenVPN, Pfsence (IPSEC & OpenVPN), etc. for Hetzner Cloud <-> On-Prem/Home infrastructure.
+Note: VPN setup is OPTIONAL for Hetzner Cloud(internal CloudVM & Dedicated Servcies), because we will use only private networks and Hetzner vSwitch to enable cloud and dedicated root servers to reach each other via their private network links. 
+
+We can use Wireguard, OpenVPN, Pfsence (IPSEC & OpenVPN), etc. for Hetzner Cloud external access <-> On-Prem/Home infrastructure.
+
+#### OpenVPN
+
+We can create CloudVM (with OpenVPN settuped) to access all private networks (and CloudVMs&Dedicated Servers). We can include all Hetzner dedicated servers in all Hetzner Cloud Networks ---> Connect your Robot vSwitch (dedicated root servers) with your Hetzner Cloud Networks. Create a new subnet in your Cloud Network and select the "Enable dedicated server vSwitch connection" checkbox. (Ref: https://docs.hetzner.com/cloud/networks/faq/)
+
+#### WireGuard
 
 Will use WireGuard VPN as example for better security for Hetzner Cloud infrastructucture: CloudVM_to_CloudVM/CloudVMs_to_Dedicated-Servers and CloudVMs&Dedicated_Servers_to_On-Prem/Home_Servers&VMs
 
