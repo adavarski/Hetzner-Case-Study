@@ -44,15 +44,15 @@ Use Hetzner vSwitch to enable cloud and dedicated root servers to reach each oth
 
 vSwitch Overview (Summary):
 
-<img src="pictures/0-hertzner-vswitch-architecture.jpg" width="500">
+<img src="pictures/0-hertzner-vswitch-architecture.jpg" width="600">
 
 vSwitch Rough overview:
 
-<img src="pictures/1-vSwith-rough-overview.png" width="500">
+<img src="pictures/1-vSwith-rough-overview.png" width="600">
 
 vSwitch example of a coupled configuration:
 
-<img src="pictures/0-hetzner-vSwitch.png" width="500">
+<img src="pictures/0-hetzner-vSwitch.png" width="600">
 
 For setup Hetzner vSwitch & Hetzner Cloud infrastructure use References: 
 
