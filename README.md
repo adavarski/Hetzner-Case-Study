@@ -85,7 +85,7 @@ Ref:
 
 ### 2.1.VPNs 
 
-VPN setup is OPTIONAL for Hetzner Cloud (private cloud internal infrastructure: Networks / CloudVM & Dedicated Servcies), because we will use only private networks and Hetzner vSwitch to enable cloud and dedicated root servers to reach each other via their private network links. Actually we can use Hetzner Cloud to build our own Privite Cloud (using only Hetzner Cloud internal networks/IPs), and use Hetzner Cloud Load Balancers/VPNs/CloudVMs(VPSs) with HAProxy/nginx/etc. for external access to our internall Private Cloud workloads/apps/k8s api/k8s ingress/private networks/VPSs/Dedicated Servers/etc.. 
+VPN setup is OPTIONAL for Hetzner Cloud (private cloud internal infrastructure: Networks / CloudVM & Dedicated Servcies), because we will use only private networks and Hetzner vSwitch to enable cloud and dedicated root servers to reach each other via their private network links. Actually we can use Hetzner Cloud to build our own Privite Cloud (using only Hetzner Cloud internal networks/IPs/etc.), and use Hetzner Cloud Load Balancers/VPNs/CloudVMs(VPSs) with HAProxy/nginx/etc. for external access to our internall Private Cloud workloads/apps/k8s api/k8s ingress/private networks/VPSs/Dedicated Servers/etc. and DNS for theese entrypoint.
 
 We can use Wireguard, OpenVPN, Pfsence (IPSEC & OpenVPN), etc. for Hetzner Cloud external access <-> On-Prem/Home infrastructure.
 
@@ -599,7 +599,7 @@ Production k8s cluster network overview:
   
 Note1: Use 3 x ccx42 (k8s masters) & 2 x ccx52 (k8s workers) and provisioning k8s cluster using Kubespray or Rancher
 
-Note2: External access to k8s API(6443) (via kubectl/etc.) and any other internal services (DBs/etc. running on Hetzner Dedicated Servers) via CloudVM+HAproxy/nginx (we use only private networks at Hetzner Cloud, for better security). CloudVM(HAProxy) is configured to access all private networks used. We can include all Hetzner dedicated servers in all Hetzner Cloud Networks ---> Connect your Robot vSwitch (dedicated root servers) with your Hetzner Cloud Network/s. Create a new subnet in your Cloud Network and select the "Enable dedicated server vSwitch connection" checkbox. (Ref: https://docs.hetzner.com/cloud/networks/faq/)
+Note2: External access to k8s API(6443) (via kubectl/etc.) and any other internal services (DBs/etc. running on Hetzner Dedicated Servers) via CloudVM+HAproxy/nginx (we use only private networks at Hetzner Cloud, for better security). CloudVM(HAProxy) is configured to access all private networks used. We can include all Hetzner dedicated servers in all Hetzner Cloud Networks ---> Connect your Robot vSwitch (dedicated root servers) with your Hetzner Cloud Network/s. Create a new subnet in your Cloud Network and select the "Enable dedicated server vSwitch connection" checkbox. (Ref: https://docs.hetzner.com/cloud/networks/faq/). Setup DNS for theese entrypoint.
 
 ## 5.Virtualization options for k8s/etc. on Hetzner Cloud (OPTIONAL) - Proxmox & Vmware on Dedicated Servers (for Dev/QA k8s clusters/etc.)
 
