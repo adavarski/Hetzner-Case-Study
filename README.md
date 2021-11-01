@@ -97,19 +97,19 @@ We can create CloudVM (with public IP & OpenVPN settuped) to access all private 
 
 Example:
 ```
-CloudVPC (VPC) public IP: XX.XX.XX.XX 
-
+OpenVPN CloudVM (VPC) public IP: XX.XX.XX.XX 
+OpenVPN CloudVM (VPC) private IP:: 10.0.0.3
 Hetzner Cloud private network: 10.0.0.0/16 (IP Range in Hetzner)
-
 Hetzner Cloud private network subnet: 10.0.0.0/24
 
-OpenVPN VPS: 10.0.0.3
-
-Server1 IP: 10.0.0.10
-Server2 IP: 10.0.0.11
+Dedicatetd Server1 IP: 10.0.0.10
+Dedicatetd Server12 IP: 10.0.0.11
+...
 VPC 1: 10.0.0.12
+VPC 2: 10.0.0.12
+...
 
----openvpn.conf
+---openvpn-server.conf
 local XX.XX.XX.XX
 port 1194
 proto udp
