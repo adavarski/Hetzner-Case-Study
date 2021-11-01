@@ -83,7 +83,7 @@ Ref:
 
 ## 2.Security : Hetzner Cloud  (& Home/On-Prem infrastructure)
 
-For Hetzner Cloud (private cloud internal infrastructure: Networks / CloudVM & Dedicated Servcies), we will use only private networks and Hetzner vSwitch to enable cloud and dedicated root servers to reach each other via their private network links. Actually we can use Hetzner Cloud to build our own Privite Cloud on top of it (using only Hetzner Cloud internal networks/IPs/etc.), and use Hetzner Cloud Load Balancers/VPNs/CloudVMs(VPSs) with HAProxy/CloudVM(Bastion host). for external access to our internall Private Cloud workloads/apps/k8s api/k8s ingress/private networks/VPSs/Dedicated Servers/etc. and DNS for theese entrypoint.
+For Hetzner Cloud (private cloud internal infrastructure: Networks / CloudVM & Dedicated Servcies), we will use only private networks and Hetzner vSwitch to enable cloud and dedicated root servers to reach each other via their private network links. Actually we can use Hetzner Cloud to build our own Privite Cloud on top of it (using only Hetzner Cloud internal networks/IPs/etc.), and use Hetzner Cloud Load Balancers/VPNs/CloudVMs(VPSs) with HAProxy/CloudVM(Bastion/Hopping hosts) for external access to our internall Private Cloud workloads/apps/k8s api/k8s ingress/private networks/VPSs/Dedicated Servers/etc. and DNS for theese entrypoint.
 
 ### 2.1.VPNs 
 
