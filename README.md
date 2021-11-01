@@ -1261,12 +1261,7 @@ kworker0   Ready    <none>                 2m19s   v1.21.5+k3s2
 kworker1   Ready    <none>                 11s     v1.21.5+k3s2
 
 root@kmaster1:~# ip a s
-1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
-    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-    inet 127.0.0.1/8 scope host lo
-       valid_lft forever preferred_lft forever
-    inet6 ::1/128 scope host 
-       valid_lft forever preferred_lft forever
+...
 2: ens18: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
     link/ether 2a:c4:50:87:ea:85 brd ff:ff:ff:ff:ff:ff
     altname enp0s18
@@ -1284,26 +1279,7 @@ root@kmaster1:~# ip a s
        valid_lft forever preferred_lft forever
     inet6 fe80::841e:a5ff:fe37:fc70/64 scope link 
        valid_lft forever preferred_lft forever
-28: veth14e4b70d@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master cni0 state UP group default 
-    link/ether 4a:f6:a0:a4:fe:2b brd ff:ff:ff:ff:ff:ff link-netns cni-7a5e02f2-15ec-c744-32f3-7eb3bdabaf0b
-    inet6 fe80::f86f:e5ff:fe6b:7302/64 scope link 
-       valid_lft forever preferred_lft forever
-29: veth4d7829ee@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master cni0 state UP group default 
-    link/ether 9a:11:a1:f0:42:cc brd ff:ff:ff:ff:ff:ff link-netns cni-56b5cd7e-b9bb-b64b-ba40-0f8abce4a377
-    inet6 fe80::145f:94ff:fe51:9d62/64 scope link 
-       valid_lft forever preferred_lft forever
-30: veth0e6fc211@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master cni0 state UP group default 
-    link/ether 66:1b:4b:d8:60:51 brd ff:ff:ff:ff:ff:ff link-netns cni-29f39a84-6fcc-0a4c-4f89-0bbea118d9ed
-    inet6 fe80::641b:4bff:fed8:6051/64 scope link 
-       valid_lft forever preferred_lft forever
-33: vethb115cecf@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master cni0 state UP group default 
-    link/ether fa:a4:e9:01:ef:e2 brd ff:ff:ff:ff:ff:ff link-netns cni-4df92095-89d2-87b4-abec-49fcc7fd90f3
-    inet6 fe80::f8a4:e9ff:fe01:efe2/64 scope link 
-       valid_lft forever preferred_lft forever
-34: veth119061eb@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master cni0 state UP group default 
-    link/ether 7a:29:21:a1:09:a6 brd ff:ff:ff:ff:ff:ff link-netns cni-0686ca8b-28e3-909b-e9b6-1490bcda7099
-    inet6 fe80::60da:4eff:feac:de0b/64 scope link 
-       valid_lft forever preferred_lft forever
+...
 
 root@kmaster1:~# wg
 interface: flannel.1
