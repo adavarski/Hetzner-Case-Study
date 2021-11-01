@@ -479,6 +479,7 @@ Ref:
 - https://github.com/hetznercloud/terraform-provider-hcloud -> Terraform Hetzner Cloud provider
 
 Example:
+```  
 wget https://github.com/hetznercloud/cli/releases/download/v1.28.1/hcloud-linux-amd64.tar.gz; tar -zxvf hcloud-linux-amd64.tar.gz; sodo mv hcloud /usr/local/bin/
   
 export HCLOUD_TOKEN="YOUR HETZNER TOKEN"
@@ -518,7 +519,8 @@ terraform apply
 
 cd ../ansible
 ansible-playbook -i inventory/hosts.ini setup-environment.yml
-
+```
+  
 ### 4.2.k8s on Hetzner Cloud: 
 
 k8s clusters provisioning/deploy : 
