@@ -134,7 +134,7 @@ Test: When connected to the OpenVPN server(VPC) with the OpenVPN client (from ho
 servers which are part of the Hetzner private cloud (10.0.0.10 & any ones dedicated servers & VPCs). 
 ```
 
-- #### WireGuard: External access to Hetzner private cloud & Setup VPN for Hetzner private cloud (for better internal private cloud security).
+- #### WireGuard: External access to Hetzner private cloud & Setup VPN for Hetzner private cloud (OPTIONAL: better internal private cloud security).
 
 WireGuard is a fast, secure VPN, easy to install, configure, and route all internal/k8s clusters traffic through. We need to generating public and private keys for each server/VM, adding a WireGuard configuration file, starting the service. For k8s cluster we need to create/setup an overlay network to tunnel Kubernetes traffic through.
 
