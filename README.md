@@ -1538,11 +1538,8 @@ Kubectl:
 $ export KUBECONFIG=./k8s-cluster.conf 
 $ kubectl version
 $ kubectl cluster-info
-Kubernetes master is running at https://172.17.8.101:6443
-coredns is running at https://172.17.8.101:6443/api/v1/namespaces/kube-system/services/coredns:dns/proxy
-kubernetes-dashboard is running at https://172.17.8.101:6443/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy
 
-$ kubectl get nodes -L beta.kubernetes.io/arch -L beta.kubernetes.io/os -L beta.kubernetes.io/instance-type
+$ kubectl get nodes 
 NAME    STATUS   ROLES    AGE    VERSION   ARCH    OS      INSTANCE-TYPE
 k8s-1   Ready    master   209d   v1.20.1   amd64   linux   
 k8s-2   Ready    master   209d   v1.20.1   amd64   linux   
