@@ -1,4 +1,4 @@
-# Hetzner Cloud: Case Study/Research Solution Architecture
+# Hetzner Cloud: Case Study/R&D Solution Architecture
 
 Using Hetzner as Cloud provider (for Cloud VMs & Dedicated Servers hosting). We want to launch Kubernetes, ScyllaDB and some other services across Hetzner Dedicated (bare-metal) and Hetzner Cloud VMs. We have to list the challenges we can identify from the services provided by Hetzner Cloud. Design the architecture for the environments. Research key technologies and configurations setup, so that Kubernetes and other services could be deployed (especially take into account how we would build environments security).
 
