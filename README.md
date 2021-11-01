@@ -479,8 +479,39 @@ Ref:
 - https://github.com/hetznercloud/terraform-provider-hcloud -> Terraform Hetzner Cloud provider
 
 Example:
-
+wget https://github.com/hetznercloud/cli/releases/download/v1.28.1/hcloud-linux-amd64.tar.gz; tar -zxvf hcloud-linux-amd64.tar.gz; sodo mv hcloud /usr/local/bin/
+  
 export HCLOUD_TOKEN="YOUR HETZNER TOKEN"
+  
+hcloud server-type list
+ID   NAME        CORES   CPU TYPE    MEMORY     DISK     STORAGE TYPE
+1    cx11        1       shared      2.0 GB     20 GB    local
+2    cx11-ceph   1       shared      2.0 GB     20 GB    network
+3    cx21        2       shared      4.0 GB     40 GB    local
+4    cx21-ceph   2       shared      4.0 GB     40 GB    network
+5    cx31        2       shared      8.0 GB     80 GB    local
+6    cx31-ceph   2       shared      8.0 GB     80 GB    network
+7    cx41        4       shared      16.0 GB    160 GB   local
+8    cx41-ceph   4       shared      16.0 GB    160 GB   network
+9    cx51        8       shared      32.0 GB    240 GB   local
+10   cx51-ceph   8       shared      32.0 GB    240 GB   network
+11   ccx11       2       dedicated   8.0 GB     80 GB    local
+12   ccx21       4       dedicated   16.0 GB    160 GB   local
+13   ccx31       8       dedicated   32.0 GB    240 GB   local
+14   ccx41       16      dedicated   64.0 GB    360 GB   local
+15   ccx51       32      dedicated   128.0 GB   600 GB   local
+22   cpx11       2       shared      2.0 GB     40 GB    local
+23   cpx21       3       shared      4.0 GB     80 GB    local
+24   cpx31       4       shared      8.0 GB     160 GB   local
+25   cpx41       8       shared      16.0 GB    240 GB   local
+26   cpx51       16      shared      32.0 GB    360 GB   local
+33   ccx12       2       dedicated   8.0 GB     80 GB    local
+34   ccx22       4       dedicated   16.0 GB    160 GB   local
+35   ccx32       8       dedicated   32.0 GB    240 GB   local
+36   ccx42       16      dedicated   64.0 GB    360 GB   local
+37   ccx52       32      dedicated   128.0 GB   600 GB   local
+38   ccx62       48      dedicated   192.0 GB   960 GB   local
+  
 
 cd terraform
 terraform apply
