@@ -105,10 +105,11 @@ Hetzner Cloud private network subnet: 10.0.0.0/24
 
 OpenVPN VPS: 10.0.0.3
 
-Server1 IP: 10.0.0.2
+Server1 IP: 10.0.0.10
+Server2 IP: 10.0.0.11
+VPC 1: 10.0.0.12
 
-openvpn.conf
-
+---openvpn.conf
 local XX.XX.XX.XX
 port 1194
 proto udp
@@ -128,6 +129,8 @@ push "dhcp-option DNS 8.8.4.4"
 keepalive 10 120
 cipher AES-256-CBC
 user nobody
+
+Test: When connected to the OpenVPN server with the OpenVPN client(from home for example), we want to be able to access (ssh/etc.) the other servers which are part of the Hetzner private cloud (10.0.0.10 & any ones dedicated servers & VPCs), access to those servers from the one cloud openvpn server.
 
 ```
 
