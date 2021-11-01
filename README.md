@@ -85,7 +85,7 @@ Ref:
 
 ### 2.1.VPNs 
 
-VPN setup is OPTIONAL for Hetzner Cloud (private cloud internal infrastructure: Networks / CloudVM & Dedicated Servcies), because we will use only private networks and Hetzner vSwitch to enable cloud and dedicated root servers to reach each other via their private network links. Actually we can use Hetzner Cloud to build our own Privite Cloud (using only Hetzner Cloud internal networks/IPs/etc.), and use Hetzner Cloud Load Balancers/VPNs/CloudVMs(VPSs) with HAProxy/nginx/etc. for external access to our internall Private Cloud workloads/apps/k8s api/k8s ingress/private networks/VPSs/Dedicated Servers/etc. and DNS for theese entrypoint.
+VPN setup is optional for Hetzner Cloud (private cloud internal infrastructure: Networks / CloudVM & Dedicated Servcies), because we will use only private networks and Hetzner vSwitch to enable cloud and dedicated root servers to reach each other via their private network links. Actually we can use Hetzner Cloud to build our own Privite Cloud on top of it (using only Hetzner Cloud internal networks/IPs/etc.), and use Hetzner Cloud Load Balancers/VPNs/CloudVMs(VPSs) with HAProxy/nginx/etc. for external access to our internall Private Cloud workloads/apps/k8s api/k8s ingress/private networks/VPSs/Dedicated Servers/etc. and DNS for theese entrypoint.
 
 We can use Wireguard, OpenVPN, Pfsence (IPSEC & OpenVPN), etc. for Hetzner Cloud external access <-> On-Prem/Home infrastructure.
 
