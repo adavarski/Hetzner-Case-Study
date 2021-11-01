@@ -1567,8 +1567,9 @@ Ref: https://github.com/kubernetes-sigs/kubespray
   
 Pre: Provision hcloud VMs using terraform/hcloud-cli/ansible and setup kubespray ansible inventory.
 
-Note: Three CX31 cloud servers from Hetzner running Ubuntu 20.04, and deployed in different locations, using hcloud terraform modules for CloudVMs provisioning.
-
+Note1: Provisioning 3 x ccx42 (k8s masters:different locations) & 5 x ccx52 (k8s workers:different locations) and provisioning k8s cluster using Kubespray.
+  
+  
 ```
 $ git clone https://github.com/kubernetes-sigs/kubespray
 $ sudo yum install python-pip; sudo pip install --upgrade pip; 
@@ -1581,7 +1582,7 @@ sudo pip3 install -r requirements.txt
 cp -rfp inventory/sample inventory/mycluster
 
 # Update Ansible inventory file with inventory builder
-declare -a IPS=(10.10.1.3 10.10.1.4 10.10.1.5)
+declare -a IPS=(10.10.1.3 10.10.1.4 10.10.1.5 10.10.1.6 10.10.1.6 10.10.1.7 10.10.1.8 10.10.1.9)
 CONFIG_FILE=inventory/mycluster/hosts.yaml python3 contrib/inventory_builder/inventory.py ${IPS[@]}
 
 # Review and change parameters under ``inventory/mycluster/group_vars``
@@ -1603,8 +1604,13 @@ $ kubectl cluster-info
 $ kubectl get nodes 
 NAME    STATUS   ROLES    AGE    VERSION   ARCH    OS      INSTANCE-TYPE
 k8s-1   Ready    master   209d   v1.20.1   amd64   linux   
-k8s-2   Ready    master   209d   v1.20.1   amd64   linux   
-k8s-3   Ready    <none>   209d   v1.20.1   amd64   linux  
+k8s-2   Ready    master   209d   v1.20.1   amd64   linux  
+k8s-3   Ready    master   209d   v1.20.1   amd64   linux   
+k8s-4   Ready    worker   209d   v1.20.1   amd64   linux  
+k8s-5   Ready    worker   209d   v1.20.1   amd64   linux  
+k8s-6   Ready    worker   209d   v1.20.1   amd64   linux  
+k8s-7   Ready    worker   209d   v1.20.1   amd64   linux  
+k8s-8   Ready    worker   209d   v1.20.1   amd64   linux  
 
 $ kubectl get pods -o wide --sort-by="{.spec.nodeName}" --all-namespaces
 
