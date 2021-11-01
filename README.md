@@ -21,7 +21,7 @@ Tasks:
 
 Prepare your [Hetzner Account](https://accounts.hetzner.com/signUp) and get API token. 
 
-First thing we need is an Hetzner account (https://accounts.hetzner.com/signUp). Sign-up, enter your credit card or PayPal and login to Hetzner UI/consle: https://accounts.hetzner.com/login
+First thing we need is an Hetzner account (https://accounts.hetzner.com/signUp). Sign-up, enter your credit card or PayPal and login to Hetzner UI/consle: https://console.hetzner.cloud
 
 
 ## List the challenges you can identify from the services provided by Hetzner
