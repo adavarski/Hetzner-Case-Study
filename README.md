@@ -15,7 +15,7 @@ Tasks:
 - Key technologies and configurations to setup (so that Kubernetes and other services could be deployed). 
 - Launch Kubernetes, ScyllaDB and some other services across dedicated (bare-metal) and Cloud VMs. 
 - Design outline the architecture for the environments. Take into account how you we build security into the environments
-
+- (OPTIONAL) PaaS/SaaS deploy on Hetzner using https://github.com/adavarski/UAP-POC & https://github.com/adavarski/k8s-UAP
 
 ## Prerequisites: Hetzner Cloud registration 
 
