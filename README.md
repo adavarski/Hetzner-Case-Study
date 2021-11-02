@@ -83,13 +83,13 @@ Ref:
 
 ## 2.Security : Hetzner Cloud  (& Home/On-Prem infrastructure)
 
-For Hetzner Cloud (private cloud internal infrastructure: Networks / CloudVM & Dedicated Servcies), we will use only private networks and Hetzner vSwitch to enable cloud and dedicated root servers to reach each other via their private network links. Actually we can use Hetzner Cloud to build our own Privite Cloud on top of it (using only Hetzner Cloud internal networks/IPs/etc.), and use Hetzner Cloud Load Balancers/VPNs/CloudVMs(VPSs) with HAProxy/CloudVM(Bastion/Hopping hosts) for external access to our internall Private Cloud workloads/apps/k8s api/k8s ingress/private networks/VPSs/Dedicated Servers/etc. and DNS for theese entrypoint.
+For Hetzner Cloud (cloud internal infrastructure: Networks / CloudVM & Dedicated Servcies), we will use only private networks and Hetzner vSwitch to enable cloud and dedicated root servers to reach each other via their private network links. Actually we can use Hetzner Cloud to build our own Privite Cloud on top of it (using only Hetzner Cloud internal networks/IPs/etc.), and use Hetzner Cloud Load Balancers/VPNs/CloudVMs(VPSs) with HAProxy/CloudVM(Bastion/Hopping hosts) for external access to our internall Private Cloud workloads/apps/k8s api/k8s ingress/private networks/VPSs/Dedicated Servers/etc. and DNS for theese entrypoint.
 
 ### 2.1.VPNs 
 
-We can use Wireguard, OpenVPN, Pfsence (IPSEC & OpenVPN), etc. for Hetzner Cloud external access <-> On-Prem/Home infrastructure.
+We can use Wireguard, OpenVPN, pFsense (IPSEC & OpenVPN), etc. for Hetzner Cloud external access <-> On-Prem/Home infrastructure.
 
-- #### OpenVPN/pfSense(OpenVPN): External access to Hetzner private cloud
+- #### OpenVPN/pfSense(OpenVPN): External access to Hetzner Cloud
 
 OpenVPN is an open-source project created by James Yonan and was released back in 2002. OpenVPN provides a high level of security using point-to-point or site-to-site connections with custom security protocol.
 
@@ -134,7 +134,7 @@ Test: When connected to the OpenVPN server(VPC) with the OpenVPN client (from ho
 servers which are part of the Hetzner private cloud (10.0.0.10 & any ones dedicated servers & VPCs). 
 ```
 
-- #### WireGuard: External access to Hetzner private cloud & Setup VPN for Hetzner Cloud:private networks (OPTIONAL: for better internal private cloud security).
+- #### WireGuard: External access to Hetzner Cloud & Setup VPN for Hetzner Cloud:private networks (OPTIONAL: for better internal cloud security).
 
 WireGuard is a fast, secure VPN, easy to install, configure, and route all internal/k8s clusters traffic through. We need to generating public and private keys for each server/VM, adding a WireGuard configuration file, starting the service. For k8s cluster we need to create/setup an overlay network to tunnel Kubernetes traffic through.
 
