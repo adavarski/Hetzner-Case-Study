@@ -1,3 +1,3 @@
 TBD
 
-Terraform/hcloud-cli sctipts/ansible/etc.
+IaC & CM: Terraform/ansible/hcloud-cli sctipts/etc.
