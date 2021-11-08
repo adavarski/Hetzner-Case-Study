@@ -1,3 +1,3 @@
-TBD:
+# WIP:
 
-GitLab/Jenkins/ArgoCD pipelines
+GitLab/Jenkins/ArgoCD/FluxCD pipelines
