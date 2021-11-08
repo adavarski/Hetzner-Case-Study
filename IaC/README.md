@@ -20,11 +20,11 @@ Examples:
 
 https://github.com/adavarski/kubeadm-hcloud-ubuntu
 
-- Rancher/RKE2 based  (not preffered: uses docker not cri-o, needs manual steps for setup via UI currently)
+- Rancher/RKE2 based  (not preferred: uses docker not cri-o, needs manual steps for setup via UI currently)
 
 ## Production cluster - HA (multi-node)
 - k8s based (preferred)
 - kubeadm based (not so preferred)
-- Rancher/RKE2 based  (not preffered: uses docker not cri-o, needs manual steps for setup via UI currently)
+- Rancher/RKE2 based  (not preferred: uses docker not cri-o, needs manual steps for setup via UI currently)
 - Kubespray (prefered: note: TF + kubespray:ansible)
 
