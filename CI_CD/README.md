@@ -1,3 +1,9 @@
-# WIP:
+# WIP
 
-GitLab/Jenkins/ArgoCD/FluxCD pipelines
+### CI/CD pipelines
+
+- GitLab (preferred) 
+- Jenkins (optional)
+- FluxCD (GitOps : k8s)
+- ArgoCD (GitOps : k8s)
+
