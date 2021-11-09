@@ -33,3 +33,8 @@ https://github.com/adavarski/k3s-hcloud-ubuntu
 - Rancher/RKE2 based  (not preferred: uses docker not cri-o, needs manual steps for setup via UI currently)
 - Kubespray (prefered: note: TF + kubespray:ansible)
 
+Exampes:
+
+https://github.com/adavarski/kubespray-hcloud
+
+
