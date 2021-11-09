@@ -605,11 +605,11 @@ Production k8s cluster overview:
   
 <img src="pictures/k8s-production_cluster.png" width="800">
   
-k8s Platform example1 (DevOps: IaC & CI/CD:Gitops with FluxCD or ArgoCD)  
+k8s Platform example1 (Hcloud DevOps: IaC & CI/CD:Gitops with FluxCD or ArgoCD)  
   
 <img src="pictures/platform.png" width="900">
 
-k8s Platform example2 (AWS ELK CI/CD:Gitops ArgoCD)  
+k8s Platform example2 (AWS EKS CI/CD:Gitops ArgoCD)  
  
 <img src="pictures/DevOps_CD.png" width="900">
 
