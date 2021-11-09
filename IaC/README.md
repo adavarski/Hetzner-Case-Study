@@ -24,6 +24,13 @@ https://github.com/adavarski/kubeadm-hcloud-ubuntu
 
 ## Production cluster - HA (multi-node)
 - k8s based (preferred)
+
+Examples: 
+
+https://github.com/adavarski/k3s-hcloud-ubuntu
+
+https://github.com/adavarski/k3s-hcloud-fedora
+
 - kubeadm based (not so preferred)
 - Rancher/RKE2 based  (not preferred: uses docker not cri-o, needs manual steps for setup via UI currently)
 - Kubespray (prefered: note: TF + kubespray:ansible)
