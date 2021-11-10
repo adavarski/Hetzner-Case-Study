@@ -22,8 +22,8 @@ https://github.com/adavarski/kubeadm-hcloud-ubuntu
 
 - Rancher/RKE2 based  (not preferred: uses docker not cri-o, needs manual steps for setup via UI currently)
 
-## Production cluster - HA (multi-node)
-- k8s based (preferred)
+## Production cluster - HA (multi-master)
+- k3s based (preferred)
 
 Examples: 
 
@@ -37,4 +37,5 @@ Exampes:
 
 https://github.com/adavarski/kubespray-hcloud
 
+<img src="../pictures/k8s-production_cluster.png" width="800">
 
