@@ -23,11 +23,15 @@ Example: Developing for Kubernetes with k3s+GitLab
 
 https://github.com/adavarski/k3s-GitLab-development
 
+Example: microservices application with Gitlab CI/CD pipelenes (build, test, release, deploy) to k8s (minikube)
+
+https://github.com/adavarski/GitLab-microservices-k8s
+
 REF:
 
-https://docs.gitlab.com/ee/user/project/clusters/add_remove_clusters.html
-https://docs.gitlab.com/runner/executors/kubernetes.html
-https://docs.gitlab.com/ee/ci/environments/
+- https://docs.gitlab.com/ee/user/project/clusters/add_remove_clusters.html
+- https://docs.gitlab.com/runner/executors/kubernetes.html
+- https://docs.gitlab.com/ee/ci/environments/
 
 ### 2.FluxCD (k8s) & ArgoCD (k8s) examples
 
