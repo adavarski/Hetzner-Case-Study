@@ -218,10 +218,11 @@ stringData:
   network: "<network-id>"
 EOF
 ```
-Now we can deploy the controller
+Now we can deploy the controller (examples):
 ```
-kubectl apply -f https://github.com/hetznercloud/hcloud-cloud-controller-manager/releases/latest/download/ccm-networks.yaml
+kubectl apply -f https://raw.githubusercontent.com/hetznercloud/hcloud-cloud-controller-manager/master/deploy/ccm-networks.yaml
 
+// kubectl apply -f https://github.com/hetznercloud/hcloud-cloud-controller-manager/releases/latest/download/ccm-networks.yaml
 // kubectl apply -f  https://raw.githubusercontent.com/hetznercloud/hcloud-cloud-controller-manager/master/deploy/v1.5.1.yaml
 ```
 ### 3.3. Deploy Hetzner Cloud Storage (CSI)
@@ -242,9 +243,10 @@ EOF
 ```
 Now deploy the api and the driver
 ```
-$ kubectl apply -f https://raw.githubusercontent.com/hetznercloud/csi-driver/v1.5.3/deploy/kubernetes/hcloud-csi.yml
+$ kubectl apply -f https://raw.githubusercontent.com/hetznercloud/csi-driver/master/deploy/kubernetes/hcloud-csi.yml
 
 
+// kubectl apply -f https://raw.githubusercontent.com/hetznercloud/csi-driver/v1.5.3/deploy/kubernetes/hcloud-csi.yml
 // kubectl apply -f https://raw.githubusercontent.com/kubernetes/csi-api/release-1.14/pkg/crd/manifests/csidriver.yaml
 // kubectl apply -f https://raw.githubusercontent.com/kubernetes/csi-api/release-1.14/pkg/crd/manifests/csinodeinfo.yaml
 // kubectl apply -f https://raw.githubusercontent.com/hetznercloud/csi-driver/v1.2.3/deploy/kubernetes/hcloud-csi.yml
@@ -260,7 +262,7 @@ LoadBalancer to the rescue. You need a LoadBalancer outside the Kubernetes Clust
 
 A LoadBalancer is also a requirement to deploy an k8s Ingress Controller/Resources like NGINX/Traefik/etc., which you want to use for your Web traffic.
 
-Deploy NGINX Ingesss Controler Example:
+Deploy NGINX Ingesss Controler (OPTIOANL, because we will use CCM) example:
 ```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
 ```
@@ -609,15 +611,11 @@ Production k8s cluster overview:
   
 <img src="pictures/k8s-production_cluster.png" width="800">
   
-k8s Platform example1 (Hcloud DevOps: IaC & CI/CD:Gitops with FluxCD or ArgoCD)  
+k8s Platform example (Hcloud DevOps: IaC & CI/CD:Gitops with FluxCD or ArgoCD)  
   
 <img src="pictures/platform.png" width="900">
 
-k8s Platform example2 (AWS EKS CI/CD:Gitops ArgoCD)  
- 
-<img src="pictures/DevOps_CD.png" width="900">
-
-  
+k  
 Note1: Use 3 x ccx42 (k8s masters) & 2 x ccx52 (k8s workers) and provisioning k8s cluster using Kubespray or Rancher
 
 Note2: External access to k8s API(6443) (via kubectl/etc.) and any other internal services (DBs/etc. running on Hetzner Dedicated Servers) via CloudVM+HAproxy/nginx (we use only private networks at Hetzner Cloud, for better security). CloudVM(HAProxy) is configured to access all private networks used. We can include all Hetzner dedicated servers in all Hetzner Cloud Networks ---> Connect your Robot vSwitch (dedicated root servers) with your Hetzner Cloud Network/s. Create a new subnet in your Cloud Network and select the "Enable dedicated server vSwitch connection" checkbox. (Ref: https://docs.hetzner.com/cloud/networks/faq/). Setup DNS for theese entrypoint.
