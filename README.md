@@ -164,7 +164,7 @@ Note4: We can use for external access to k8s API(6443) (via kubectl/etc.) and an
 
 We can setup firewalls via terraform/ansible/hcloud-cli.
 
-Setup firewall rules via shell scripts, using hcloud-cli util example(k8s-related):
+Setup firewall rules via shell scripts, using hcloud-cli util example (k8s-related):
 ```
 ### Example1:
 hcloud firewall create --name firewall-kubernetes
@@ -592,7 +592,7 @@ k8s clusters provisioning/deploy :
 
 Note: Use https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs to provision k8s CloudVMs.
   
-See [IaC](https://github.com/adavarski/Hetzner-Case-Study/tree/main/IaC) for development/production k8s cluster provisioning.
+#### See [IaC](https://github.com/adavarski/Hetzner-Case-Study/tree/main/IaC) for development/production k8s cluster provisioning.
 
 See Appendixes for k3s-base, kubeadm-based, Ranchier-based DEVELOPMENT k3s clusters provisioning/setup && Kubespray/Ranchier for PRODUCTION k3s clusters provisioning/setup EXAMPLES:
 
@@ -660,7 +660,7 @@ GitLab can be integrated (add existing k8s cluster) with Kubernetes and can be r
 - (GitLab example) : Integrate k8s cluster with GitLab (GitOps) & Deploy in-Cluster GitLab for K8s Development HOWTO (Developing for Kubernetes with k3s+GitLab): https://github.com/adavarski/k3s-GitLab-development
 - (Jenkins example): https://github.com/adavarski/jenkins-dev-environment & https://github.com/adavarski/PostGUI-k8s-demo & etc.
  
-See [CI_CD](https://github.com/adavarski/Hetzner-Case-Study/tree/main/CI_CD) for CI/CD infrastructure & pipelines.
+### See [CI_CD](https://github.com/adavarski/Hetzner-Case-Study/tree/main/CI_CD) for CI/CD infrastructure & pipelines.
   
   
 Note: GitOps
