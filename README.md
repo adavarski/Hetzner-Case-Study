@@ -1587,13 +1587,23 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 
 ### Appendix_6: Kubespray-based Production Ready Kubernetes Clusters on Hetzner Cloud (2 k8s Mastes in different locations) 
 
-Ref: https://github.com/kubernetes-sigs/kubespray
+Ref: https://github.com/kubernetes-sigs/kubespray & https://github.com/adavarski/kubespray-hcloud
   
 Setup kubespray ansible inventory.
 
-Note: Provisioning 3 x ccx42 (k8s masters:different locations) & 5 x ccx52 (k8s workers:different locations) and provisioning k8s cluster using Kubespray. We can use also VPSs for k8s and provisionig them via terraform.
+Note: Provisioning 3 x ccx42 (k8s masters:different locations) & 2 x ccx52 (k8s workers:different locations) and provisioning k8s cluster using Kubespray. We can use also VPSs for k8s and provisionig them via terraform.
   
-  
+For example we will use Hcloud VMs & https://github.com/adavarski/kubespray-hcloud
+```
+$ hcloud server list
+ID         NAME         STATUS    IPV4            IPV6                     DATACENTER
+15913825   worker-001   running   23.88.61.1      2a01:4f8:c0c:2d3b::/64   nbg1-dc3
+15913826   worker-002   running   49.12.226.241   2a01:4f8:c0c:aa9a::/64   nbg1-dc3
+15913827   master-001   running   23.88.101.36    2a01:4f8:c2c:329f::/64   nbg1-dc3
+15913828   master-002   running   23.88.107.54    2a01:4f8:c0c:963d::/64   nbg1-dc3
+15913829   master-003   running   49.12.225.212   2a01:4f8:c2c:232b::/64   nbg1-dc3
+
+```  
 ```
 $ git clone https://github.com/kubernetes-sigs/kubespray
 $ sudo yum install python-pip; sudo pip install --upgrade pip; 
@@ -1606,7 +1616,7 @@ sudo pip3 install -r requirements.txt
 cp -rfp inventory/sample inventory/mycluster
 
 # Update Ansible inventory file with inventory builder
-declare -a IPS=(10.10.1.3 10.10.1.4 10.10.1.5 10.10.1.6 10.10.1.6 10.10.1.7 10.10.1.8 10.10.1.9)
+declare -a IPS=(10.0.1.3 10.0.1.4 10.0.1.5 10.0.1.1 10.0.1.2)
 CONFIG_FILE=inventory/mycluster/hosts.yaml python3 contrib/inventory_builder/inventory.py ${IPS[@]}
 
 # Review and change parameters under ``inventory/mycluster/group_vars``
@@ -1625,16 +1635,13 @@ $ export KUBECONFIG=./k8s-cluster.conf
 $ kubectl version
 $ kubectl cluster-info
 
-$ kubectl get nodes 
-NAME    STATUS   ROLES    AGE    VERSION   ARCH    OS      INSTANCE-TYPE
-k8s-1   Ready    master   209d   v1.20.1   amd64   linux   
-k8s-2   Ready    master   209d   v1.20.1   amd64   linux  
-k8s-3   Ready    master   209d   v1.20.1   amd64   linux   
-k8s-4   Ready    worker   209d   v1.20.1   amd64   linux  
-k8s-5   Ready    worker   209d   v1.20.1   amd64   linux  
-k8s-6   Ready    worker   209d   v1.20.1   amd64   linux  
-k8s-7   Ready    worker   209d   v1.20.1   amd64   linux  
-k8s-8   Ready    worker   209d   v1.20.1   amd64   linux  
+$ kubectl get node -o wide
+NAME         STATUS   ROLES                  AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION     CONTAINER-RUNTIME
+master-001   Ready    control-plane,master   5m38s   v1.22.3   10.0.1.3      <none>        Ubuntu 20.04.3 LTS   5.4.0-89-generic   docker://20.10.9
+master-002   Ready    control-plane,master   5m15s   v1.22.3   10.0.1.4      <none>        Ubuntu 20.04.3 LTS   5.4.0-89-generic   docker://20.10.9
+master-003   Ready    control-plane,master   5m5s    v1.22.3   10.0.1.5      <none>        Ubuntu 20.04.3 LTS   5.4.0-89-generic   docker://20.10.9
+worker-001   Ready    <none>                 4m5s    v1.22.3   10.0.1.1      <none>        Ubuntu 20.04.3 LTS   5.4.0-89-generic   docker://20.10.9
+worker-002   Ready    <none>                 4m5s    v1.22.3   10.0.1.2      <none>        Ubuntu 20.04.3 LTS   5.4.0-89-generic   docker://20.10.9
 
 $ kubectl get pods -o wide --sort-by="{.spec.nodeName}" --all-namespaces
 
@@ -1649,13 +1656,7 @@ $ helm search repo stable
 $ helm install stable/postgresql ... ; etc. etc.
 
 $ helm ls
-NAME                    	NAMESPACE	REVISION	UPDATED                                 	STATUS  	CHART              	APP VERSION
-fluent-bit-1594282992   	default  	1       	2020-07-09 11:23:16.306895607 +0300 EEST	deployed	fluent-bit-2.8.17  	1.3.7      
-grafana-1594282747      	default  	1       	2020-07-09 11:19:10.878858677 +0300 EEST	deployed	grafana-5.3.5      	7.0.3      
-kibana-1594282930       	default  	1       	2020-07-09 11:22:14.332304833 +0300 EEST	deployed	kibana-3.2.6       	6.7.0      
-logstash-1594282961     	default  	1       	2020-07-09 11:22:45.049385698 +0300 EEST	deployed	logstash-2.4.0     	7.1.1      
-postgresql-1594282655   	default  	1       	2020-07-09 11:17:38.550513366 +0300 EEST	deployed	postgresql-8.6.4   	11.7.0     
-telegraf-1594282866     	default  	1       	2020-07-09 11:21:09.59958005 +0300 EEST 	deployed	telegraf-1.6.1     	1.12       
+
 ```
   
 ### Appendix_7: ScyllaDB on k8s 
