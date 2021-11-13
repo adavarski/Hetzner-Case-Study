@@ -603,9 +603,9 @@ Note: Use https://registry.terraform.io/providers/hetznercloud/hcloud/latest/doc
 - https://github.com/adavarski/kubeadm-hcloud-ubuntu (kubeadm-based)
 
   
-Note: For more details see [IaC](https://github.com/adavarski/Hetzner-Case-Study/tree/main/IaC) folder.
+#### Note: For more details see [IaC](https://github.com/adavarski/Hetzner-Case-Study/tree/main/IaC) folder.
 
-See Appendixes for k3s-base, kubeadm-based, Ranchier-based DEVELOPMENT k3s clusters provisioning/setup && Kubespray/Ranchier for PRODUCTION k3s clusters provisioning/setup EXAMPLES:
+See Appendixes for k3s-base, kubeadm-based, Ranchier-based DEVELOPMENT k3s clusters provisioning/setup && Kubespray/Ranchier for PRODUCTION k3s clusters provisioning/setup EXAMPLES (manual k8s setup):
 
 - [Appendix_1: k3s-based Kubernetes development cluster on Hetzner Cloud (private network)](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#appendix_1-k3s-based-kubernetes-development-cluster-on-hetzner-cloud-private-network-1)
 - [Appendix_2: Rancher-based Kubernetes Development cluster on Hetzner Cloud  (private network)](https://github.com/adavarski/Hetzner-Case-Study/blob/main/README.md#appendix_2--rancher-based-kubernetes-development-cluster-on-hetzner-cloud--private-network)
