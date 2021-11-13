@@ -603,7 +603,7 @@ Note: Use https://registry.terraform.io/providers/hetznercloud/hcloud/latest/doc
 - https://github.com/adavarski/kubeadm-hcloud-ubuntu (kubeadm-based)
 
   
-Note: For more details see [IaC](https://github.com/adavarski/Hetzner-Case-Study/tree/main/IaC).
+Note: For more details see [IaC](https://github.com/adavarski/Hetzner-Case-Study/tree/main/IaC) folder.
 
 See Appendixes for k3s-base, kubeadm-based, Ranchier-based DEVELOPMENT k3s clusters provisioning/setup && Kubespray/Ranchier for PRODUCTION k3s clusters provisioning/setup EXAMPLES:
 
@@ -668,18 +668,19 @@ See [Appendix_6: ScyllaDB on k8s](https://github.com/adavarski/Hetzner-Case-Stud
   
 GitLab can be integrated (add existing k8s cluster) with Kubernetes and can be run inside k8s or on CloudVM/Dedicated Server.
 
-- (GitLab example) : Integrate k8s cluster with GitLab (GitOps) & Deploy in-Cluster GitLab for K8s Development HOWTO (Developing for Kubernetes with k3s+GitLab): https://github.com/adavarski/k3s-GitLab-development
+- (GitLab example) : Integrate k8s cluster with GitLab (GitOps) & Deploy in-Cluster GitLab for K8s Development HOWTO (Developing for Kubernetes with k3s+GitLab): https://github.com/adavarski/k3s-GitLab-development && https://github.com/adavarski/GitLab-microservices-k8s
+
 - (Jenkins example): https://github.com/adavarski/jenkins-dev-environment & https://github.com/adavarski/PostGUI-k8s-demo & etc.
  
-### See [CI_CD](https://github.com/adavarski/Hetzner-Case-Study/tree/main/CI_CD) for CI/CD infrastructure & pipelines.
-  
-  
+ 
 Note: GitOps
 
 New concepts like GitOps aim to completely manage the active configuration state directly with Git. GitOps, a process popularized by Weaveworks, is another trending concept within the scope of Kubernetes CI/CD. GitOps involves the use of applications reacting to git push events. GitOps focuses primarily on Kubernetes clusters matching the state described by configuration (www.weave.works/technologies/gitops/ ; www.gitops.tech/) residing in a Git repository. On a simplistic level, GitOps aims to replace kubectl apply with git push. Popular and well-supported GitOps implementations include ArgoCD, Flux, and Jenkins X, GitLAb. GitLab k8s integration supports GitOps.
 
 GitOps, a process popularized by Weaveworks, is another trending concept within the scope of Kubernetes CI/CD. GitOps involves the use of applications reacting to git push events. GitOps focuses primarily on Kubernetes clusters matching the state described by configuration residing in a Git repository. On a simplistic level, GitOps aims to replace kubectl apply with git push. Popular and well-supported GitOps implementations include GitLab, ArgoCD, Flux, and Jenkins X. Argo CD (GitOps): We can configure argo to run deployments for us instead of kubectl apply -f. 
 
+### Note: See [CI_CD](https://github.com/adavarski/Hetzner-Case-Study/tree/main/CI_CD) folder for CI/CD infrastructure & pipelines.
+  
 
 ### Appendix_1: k3s-based Kubernetes development cluster on Hetzner Cloud (private network) 
 
