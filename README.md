@@ -629,7 +629,7 @@ k8s Platform example (Hcloud DevOps: IaC & CI/CD:Gitops with FluxCD or ArgoCD)
 <img src="pictures/platform.png" width="900">
 
 
-Note1: Use 3 x ccx42 (k8s masters) & 2 x ccx52 (k8s workers) and provisioning k8s cluster using Kubespray or Rancher
+Note1: Use Hcloud Cloud VMs or use 3 x ccx42 (k8s masters) & 2 x ccx52 (k8s workers) for example and provisioning k8s cluster using Kubespray.
 
 Note2: External access to k8s API(6443) (via kubectl/etc.) and any other internal services (DBs/etc. running on Hetzner Dedicated Servers) via CloudVM+HAproxy/nginx (we use only private networks at Hetzner Cloud, for better security). CloudVM(HAProxy) is configured to access all private networks used. We can include all Hetzner dedicated servers in all Hetzner Cloud Networks ---> Connect your Robot vSwitch (dedicated root servers) with your Hetzner Cloud Network/s. Create a new subnet in your Cloud Network and select the "Enable dedicated server vSwitch connection" checkbox. (Ref: https://docs.hetzner.com/cloud/networks/faq/). Setup DNS for theese entrypoint.
 
