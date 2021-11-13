@@ -1597,15 +1597,15 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 
 ```
 
-### Appendix_6: Kubespray-based Production Ready Kubernetes Clusters on Hetzner Cloud (2 k8s Mastes in different locations) 
+### Appendix_6: Kubespray-based Production Ready Kubernetes Clusters on Hetzner Cloud (3 k8s Mastes:multi-node) 
 
-Ref: https://github.com/kubernetes-sigs/kubespray & https://github.com/adavarski/kubespray-hcloud
+Ref: https://github.com/kubernetes-sigs/kubespray && https://github.com/adavarski/kubespray-hcloud
   
 Setup kubespray ansible inventory.
 
-Note: Provisioning 3 x ccx42 (k8s masters:different locations) & 2 x ccx52 (k8s workers:different locations) and provisioning k8s cluster using Kubespray. We can use also VPSs for k8s and provisionig them via terraform.
+Note: Provisioning 3 x ccx42 (k8s masters:different locations) & 2 x ccx52 (k8s workers:different locations) and provisioning k8s cluster using Kubespray. We will use VPSs for k8s and provisionig them via terraform for this appendix.
   
-For example we will use Hcloud VMs & https://github.com/adavarski/kubespray-hcloud
+For example we will use Hcloud VMs (Ref: https://github.com/adavarski/kubespray-hcloud)
 ```
 $ hcloud server list
 ID         NAME         STATUS    IPV4            IPV6                     DATACENTER
