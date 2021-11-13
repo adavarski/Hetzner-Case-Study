@@ -591,8 +591,19 @@ k8s clusters provisioning/deploy :
 - We will us k8s Operators/Helm Charts/YAML manifests for creating k8s deployments/workloads (for PaaS/SaaS services).
 
 Note: Use https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs to provision k8s CloudVMs.
+ 
+#### Production/Development k3s cluster provisioning  (IaC examples):
+
+- https://github.com/adavarski/kubespray-hcloud (kubespray-based, HA:multi-master)
+ 
+- https://github.com/adavarski/k3s-hcloud-ubuntu (k3s-based, HA:multi-master)
+
+- https://github.com/adavarski/k3s-hcloud-fedora (k3s-based)
+
+- https://github.com/adavarski/kubeadm-hcloud-ubuntu (kubeadm-based)
+
   
-#### See [IaC](https://github.com/adavarski/Hetzner-Case-Study/tree/main/IaC) for development/production k8s cluster provisioning.
+Note: For more details see [IaC](https://github.com/adavarski/Hetzner-Case-Study/tree/main/IaC).
 
 See Appendixes for k3s-base, kubeadm-based, Ranchier-based DEVELOPMENT k3s clusters provisioning/setup && Kubespray/Ranchier for PRODUCTION k3s clusters provisioning/setup EXAMPLES:
 
