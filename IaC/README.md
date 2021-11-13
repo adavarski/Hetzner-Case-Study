@@ -1,8 +1,8 @@
-# WIP:
 
-Note1: Use terraform (preferred) for IaC for easy create/destroy infrastucture & k8s
 
-Note2: Use ansible/hcloud-cli sctipts/etc. for CM (Configuration Management) if not possible to use only Terraform. 
+- Note1: Use terraform (preferred) for IaC for easy create/destroy infrastucture & k8s
+
+- Note2: Use ansible/hcloud-cli sctipts/etc. for CM (Configuration Management) if not possible to use only Terraform. 
 
 ## Development cluster
 - k3s based (preferred)
