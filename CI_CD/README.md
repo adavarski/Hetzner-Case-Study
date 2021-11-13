@@ -1,5 +1,5 @@
 
-### CI/CD pipelines
+# CI/CD pipelines
 
 - GitLab (preferred) 
 - Jenkins (optional)
