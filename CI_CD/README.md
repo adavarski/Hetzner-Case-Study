@@ -1,4 +1,3 @@
-# WIP
 
 ### CI/CD pipelines
 
