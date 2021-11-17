@@ -73,7 +73,7 @@ Hetzner Cloud locations:
 
 Note: Provisioned the servers/CloudVMs with IaC tools like terraform/ansible/hcloud-cli/etc. in multiple Hetzner Cloud locations -> examples: ('nbg1', 'fsn1' or 'hel1'). 
 
-### 1.3. DNS : Hetzner Cloud
+### 1.3. DNS : Hetzner Cloud or Cloudflare
 
 Configure DNS records for all Dedicated Servers/VMs/Load Balansers/k8s Ingress/etc.
 
