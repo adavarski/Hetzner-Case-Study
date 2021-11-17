@@ -15,7 +15,7 @@ https://github.com/adavarski/k3s-hcloud-ubuntu
 https://github.com/adavarski/k3s-hcloud-fedora
 
 
-- kubeadm based (not so prefered)
+- kubeadm based (prefered)
 
 Examples:
 
@@ -30,7 +30,7 @@ Examples:
 
 https://github.com/adavarski/k3s-hcloud-ubuntu
 
-- kubeadm based (not so preferred)
+- kubeadm based (preferred)
 - Rancher/RKE2 based  (not preferred: uses docker not cri-o, needs manual steps for setup via UI currently)
 - Kubespray (prefered: note: TF + kubespray:ansible)
 
