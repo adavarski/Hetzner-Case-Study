@@ -34,12 +34,18 @@ REF:
 
 ### 2.FluxCD (k8s) & ArgoCD (k8s) examples
 
-FluxCD (HCloud):
+GitLab + ArgoCD (Ref: https://levelup.gitconnected.com/gitops-in-kubernetes-with-gitlab-ci-and-argocd-9e20b5d3b55b)
 
-<img src="../pictures/platform.png" width="800">
+<img src="../pictures/gitlab-argocd.png" width="800"> 
 
 ArgoCD example (AWS):
 
 <img src="../pictures/DevOps_CD.png" width="800">
+
+FluxCD (HCloud):
+
+<img src="../pictures/platform.png" width="800">
+
+
 
 
