@@ -31,6 +31,7 @@ REF:
 - https://docs.gitlab.com/ee/user/project/clusters/add_remove_clusters.html
 - https://docs.gitlab.com/runner/executors/kubernetes.html
 - https://docs.gitlab.com/ee/ci/environments/
+- https://chris-vermeulen.com/using-gitlab-registry-with-kubernetes/
 
 ### 2.FluxCD (k8s) & ArgoCD (k8s) examples
 
