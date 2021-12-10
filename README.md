@@ -624,10 +624,13 @@ Production k8s cluster overview:
   
 <img src="pictures/k8s-production_cluster.png" width="800">
   
-k8s Platform example (Hcloud DevOps: IaC & CI/CD:Gitops with FluxCD or ArgoCD)  
+k8s Platform example (Hcloud Gitops with FluxCD):  
   
 <img src="pictures/platform.png" width="900">
 
+k8s Platform example (GitOps in Kubernetes with GitLab CI and ArgoCD):
+  
+<img src="pictures/gitlab-argocd.png" width="800"> 
 
 Note1: Use Hcloud Cloud VMs or use 3 x ccx42 (k8s masters) & 2 x ccx52 (k8s workers) for example and provisioning k8s cluster using Kubespray.
 
