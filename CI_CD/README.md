@@ -35,7 +35,7 @@ REF:
 
 ### 2.FluxCD (k8s) & ArgoCD (k8s) examples
 
-GitLab + ArgoCD (Ref: https://levelup.gitconnected.com/gitops-in-kubernetes-with-gitlab-ci-and-argocd-9e20b5d3b55b)
+GitLab + ArgoCD (Ref: https://levelup.gitconnected.com/gitops-in-kubernetes-with-gitlab-ci-and-argocd-9e20b5d3b55b && https://chris-vermeulen.com/using-gitlab-registry-with-kubernetes/)
 
 <img src="../pictures/gitlab-argocd.png" width="800"> 
 
